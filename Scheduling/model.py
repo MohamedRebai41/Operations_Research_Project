@@ -1,9 +1,46 @@
 from gurobipy import Model, GRB
 
 
+def schedule(nb_tasks,nb_resources,tasks,priorities):
+    """
+        - The input should be of the following format:
+            - tasks should be a matrix: Each array in the matrix the represents the resources of that task
+            - priorities: Each element is an array of two elements
+    """
+    validate_input(nb_tasks,nb_resources,tasks,priorities)
+    edge_list = build_graph(tasks)
+    return schedule_(nb_tasks,edge_list,priorities)
 
 
-def schedule(n,edge_list,priority_edges):
+def build_graph(tasks):
+    resources=len(tasks)*[[]]
+    for i in range(len(tasks)):
+        for res in tasks[i]:
+            resources[res].append(i)
+    edge_list = []
+    #Building the graph
+    for resource in resources:
+        for i in range(len(resource)):
+            for j in range(i+1,len(resource)):
+                edge_list.append([i,j])
+    return edge_list
+
+def validate_input(nb_tasks,nb_resources,tasks,priorities):
+    if(len(tasks) !=nb_tasks):
+        raise Exception("The data is incomplete")
+    for task in tasks:
+        for x in task:
+            if(x<0 or x>=nb_resources):
+                raise Exception(f"The resource {x} does not exist")
+    for pr in priorities:
+        if(len(pr)!=2):
+            raise Exception("Incorrect input at priorities")
+        if(pr[0]<0 or pr[0]>=nb_tasks):
+            raise Exception(f"The task {pr[0]} does not exist")
+        if(pr[0]<0 or pr[0]>=nb_tasks):
+            raise Exception(f"The task {pr[1]} does not exist")
+
+def schedule_(n,edge_list,priority_edges):
     """
         - The Problem is defined using two graphs:
             - A graph that defines the coloring problem: edge_list
