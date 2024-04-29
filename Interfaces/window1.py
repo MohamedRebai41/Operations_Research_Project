@@ -13,9 +13,7 @@ class AddItemDialog(QtWidgets.QDialog):
         calories = self.text3.toPlainText()
         lipides = self.text4.toPlainText()
         cout = self.text5_1.toPlainText()
-        if item and proteine and calories and lipides and cout:
-            return item, proteine, calories, lipides, cout
-        return None, None, None, None, None
+        return item, proteine, calories, lipides, cout
 
 class AddConstraintDialog(QtWidgets.QDialog):
     def __init__(self):
@@ -45,10 +43,30 @@ class Window1(QtWidgets.QMainWindow):
         self.button1.setStyleSheet("background-color: #8c4669; color: white;")
         self.table1.setColumnCount(6)  
         self.table2.setColumnCount(3)
-        self.add0.clicked.connect(self.add_constraint)
-        self.add0.setStyleSheet("background-color: #8c4669; color: white;")
+        self.add.clicked.connect(self.add_constraint)
+        self.add.setStyleSheet("background-color: #8c4669; color: white;")
         self.optimise.setStyleSheet("background-color: #8c4669; color: white;")
+        self.add1.setStyleSheet("background-color: #8c4669; color: white;")
+        self.add1.clicked.connect(self.getBasicConstraints)
         
+    def getBasicConstraints(self):
+        proteines=self.cont1.toPlainText()
+        calories=self.cont2.toPlainText()
+        lipides=self.cont3.toPlainText()
+
+        if proteines and calories and lipides:
+            constraints.append(["proteines", proteines])
+            constraints.append(["calories", calories])
+            constraints.append(["lipides", lipides])
+            #add the constraints to the table
+            for i in range(3):
+                row_position = self.table2.rowCount()
+                self.table2.insertRow(row_position)
+                self.table2.setItem(row_position, 0, QtWidgets.QTableWidgetItem(constraints[i][0]))
+                self.table2.setItem(row_position, 1, QtWidgets.QTableWidgetItem(constraints[i][1]))
+                delete_button = QtWidgets.QPushButton("Delete")
+                delete_button.clicked.connect(lambda _, row=row_position: self.delete_row2(row))
+                self.table2.setCellWidget(row_position, 2, delete_button)
     
 
     def open_dialog(self):
@@ -99,11 +117,10 @@ class Window1(QtWidgets.QMainWindow):
                 break
         self.table1.removeRow(row)
         items.pop(row)
-
-
     
     def delete_row2(self, row):
         self.table2.removeRow(row)
         constraints.pop(row)
 
+#bech taccedi lel partie eli bech tekteb feha self.result
 
