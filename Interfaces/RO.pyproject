@@ -1,0 +1,9 @@
+{
+    "files": [
+        "window.py",
+        "form.ui",
+        "window1.ui",
+        "itemForm.ui",
+        "constraintForm.ui"
+    ]
+}
