@@ -4,6 +4,8 @@
         "form.ui",
         "window1.ui",
         "itemForm.ui",
-        "constraintForm.ui"
+        "constraintForm.ui",
+        "window2.ui",
+        "taskForm.ui"
     ]
 }
