@@ -1,5 +1,4 @@
 from PyQt5 import QtWidgets, uic
-from Nutrition.model import optimize
 
 class AddItemDialog(QtWidgets.QDialog):
     def __init__(self):
@@ -36,7 +35,6 @@ class AddConstraintDialog(QtWidgets.QDialog):
 items=[]
 constraints=[]
 
-
 class Window1(QtWidgets.QMainWindow):
     def __init__(self):
         super(Window1, self).__init__()
@@ -51,17 +49,16 @@ class Window1(QtWidgets.QMainWindow):
         self.opt.clicked.connect(self.optimise)
         self.add1.setStyleSheet("background-color: #8c4669; color: white;")
         self.add1.clicked.connect(self.getBasicConstraints)
-        self.result.hide()
         
     def getBasicConstraints(self):
-        self.proteines=self.cont1.toPlainText()
-        self.calories=self.cont2.toPlainText()
-        self.lipides=self.cont3.toPlainText()
+        proteines=self.cont1.toPlainText()
+        calories=self.cont2.toPlainText()
+        lipides=self.cont3.toPlainText()
 
-        if self.proteines and self.calories and self.lipides:
-            constraints.append(["proteines", self.proteines])
-            constraints.append(["calories", self.calories])
-            constraints.append(["lipides", self.lipides])
+        if proteines and calories and lipides:
+            constraints.append(["proteines", proteines])
+            constraints.append(["calories", calories])
+            constraints.append(["lipides", lipides])
             #add the constraints to the table
             for i in range(3):
                 row_position = self.table2.rowCount()
@@ -128,36 +125,32 @@ class Window1(QtWidgets.QMainWindow):
 
     def optimise(self):
         print("Optimising...")
-        if(self.proteines and self.calories and self.lipides and items and constraints):
-            self.result.show()
-            nb_items = len(items)
-            names = [item[0] for item in items]
-            cout = [int(item[4]) for item in items]
-            constraintsInf= []
-            constraintsSup = []
+        proteines=self.cont1.toPlainText()
+        calories=self.cont2.toPlainText()
+        lipides=self.cont3.toPlainText()
+        nb_items = len(items)
+        names = [item[0] for item in items]
+        cout = [int(item[4]) for item in items]
+        constraintsInf= []
+        constraintsSup = []
 
-            for i in range(len(constraints)):
-                temp = [0]*nb_items
-                for j in range(nb_items):
-                    if constraints[i][0] == names[j]:
-                        temp[j] = 1
-                        break
-                temp.append(int(constraints[i][1]))
-                constraintsSup.append(temp)
-            const = [self.proteines, self.calories, self.lipides]
-            for i in range(3):
-                temp = []
-                for j in range(nb_items):
-                    temp.append(items[j][i+1])
-                temp.append(int(const[i]))
-                constraintsInf.append(temp)
-            x=optimize(nb_items, names, cout, constraintsInf, constraintsSup)
+        for i in range(len(constraints)):
+            temp = [0]*nb_items
+            for j in range(nb_items):
+                if constraints[i][0] == names[j]:
+                    temp[j] = 1
+                    break
+            temp.append(int(constraints[i][1]))
+            constraintsSup.append(temp)
+        const = [proteines, calories, lipides]
+        for i in range(3):
+            temp = []
+            for j in range(nb_items):
+                temp.append(items[j][i+1])
+            temp.append(int(const[i]))
+            constraintsInf.append(temp)
+        # call the optimization function to get the result 
+        x=optimize(nb_items, names, cout, constraintsInf, constraintsSup)
 
-            self.table_optimized.setRowCount(nb_items)
-            for i in range(nb_items):
-                item_name = QtWidgets.QTableWidgetItem(names[i])
-                item_value = QtWidgets.QTableWidgetItem(str(x[i]))
-                self.table_optimized.setItem(i, 0, item_name)
-                self.table_optimized.setItem(i, 1, item_value)
-
+#bech taccedi lel partie eli bech tekteb feha self.result
 
