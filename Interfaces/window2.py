@@ -148,17 +148,18 @@ class Window2(QtWidgets.QMainWindow):
     def calculate(self):
         try:
             result = schedule(len(tasks), len(resources), tasks_resources, priority)
-            # self.resultTable.show()
-            # self.resultTable.setRowCount(len(tasks))
-            # for i, task in enumerate(tasks):
-            #     resource_text = ', '.join([result[index] for index in tasks_resources[i]])
-            #     self.resTable.setItem(i, 0, QtWidgets.QTableWidgetItem(task))
-            #     self.resTable.setItem(i, 1, QtWidgets.QTableWidgetItem(resource_text))
-            # self.resTable.resizeColumnsToContents()
+            self.resultTable.show()
+            self.resultTable.setRowCount(len(tasks))
+            for i in enumerate(tasks):
+                resource_text = ', '.join([result[i]])
+                self.resTable.setItem(i, 0, QtWidgets.QTableWidgetItem("Session " + str(i)))
+                self.resTable.setItem(i, 1, QtWidgets.QTableWidgetItem(resource_text))
+            self.resTable.resizeColumnsToContents()
             print(result)
         except Exception as e:
             print(e)
-            
+            self.resultLabel.setText("Error: " + str(e))
+
 
        
 
