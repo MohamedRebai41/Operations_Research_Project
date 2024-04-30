@@ -1,5 +1,11 @@
 from PyQt5 import QtWidgets, uic
+import sys
+import os
 
+parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(parent_dir)
+
+from Nutrition.model import optimize
 class AddItemDialog(QtWidgets.QDialog):
     def __init__(self):
         super(AddItemDialog, self).__init__()

@@ -42,7 +42,7 @@ def format_result(x):
         result.append(x[i].x)
     return result
 
-def optimaze(nb_items,names,cout,contraintesInf,contrainteSup):
+def optimize(nb_items,names,cout,contraintesInf,contrainteSup):
     validate_input(nb_items,names,cout,contraintesInf,contrainteSup)
     x = add_variable(model,names)
     model.update()
@@ -64,7 +64,7 @@ def main():
     cout = [3,24,13,9,20,19]
     contraintesInf = [[110,205,160,160,420,260,2000],[4,32,13,8,4,14,55],[2,12,54,285,22,80,800]]
     contrainteSup = [[1,0,0,0,0,0,4],[0,1,0,0,0,0,3],[0,0,1,0,0,0,2],[0,0,0,1,0,0,8],[0,0,0,0,1,0,2],[0,0,0,0,0,1,2]]
-    temp = optimaze(6,names,cout,contraintesInf,contrainteSup)
+    temp = optimize(6,names,cout,contraintesInf,contrainteSup)
     print(temp)
 
 if __name__ == "__main__":
