@@ -42,10 +42,14 @@ def plot_benchmarks(nv_benchmark, md_benchmark):
     plt.show()  
 
 
+def compare(graph_type="normal",nb_testcases=20,threshold=5,priority='False'):
+    nv_benchmarks= benchmark(nv.schedule_,graph_type,nb_testcases,threshold,priority)
+    md_benchmarks = benchmark(md.schedule_,graph_type,nb_testcases,threshold,priority)
+    plot_benchmarks(nv_benchmarks,md_benchmarks)
 
-nv_benchmarks_normal = benchmark(nv.schedule_,"normal",20,3,True)
-md_benchmarks_normal = benchmark(md.schedule_,"normal",20,3,True)
-plot_benchmarks(nv_benchmarks_normal,md_benchmarks_normal)
+
+
+
 
 
 

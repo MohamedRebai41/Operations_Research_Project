@@ -9,7 +9,7 @@ def schedule(nb_tasks,nb_resources,tasks,priorities):
     """
     validate_input(nb_tasks,nb_resources,tasks,priorities)
     edge_list = build_graph(tasks)
-    return schedule_(nb_tasks,edge_list,priorities)
+    return get_session_plan(schedule_(nb_tasks,edge_list,priorities))
 
 
 def build_graph(tasks):
