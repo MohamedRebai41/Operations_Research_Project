@@ -162,11 +162,11 @@ class Window1(QtWidgets.QMainWindow):
             print(x)
 
             # # Set row and column count
-            # self.result.setRowCount(len(items))
+            self.result.setRowCount(len(items))
 
-            # for i in range(nb_items):
-            #     self.result.setItem(i, 0, QtWidgets.QTableWidgetItem(str(items[i])))
-                # self.result.setItem(i, 1, QtWidgets.QTableWidgetItem(str(x[i])))
+            for i in range(nb_items):
+                self.result.setItem(i, 0, QtWidgets.QTableWidgetItem(str(items[i][0])))
+                self.result.setItem(i, 1, QtWidgets.QTableWidgetItem(str(x[i])))
 
 
 
