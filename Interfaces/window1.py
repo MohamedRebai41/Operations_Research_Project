@@ -55,16 +55,17 @@ class Window1(QtWidgets.QMainWindow):
         self.opt.clicked.connect(self.optimise)
         self.add1.setStyleSheet("background-color: #8c4669; color: white;")
         self.add1.clicked.connect(self.getBasicConstraints)
+        self.result.hide()
         
     def getBasicConstraints(self):
-        proteines=self.cont1.toPlainText()
-        calories=self.cont2.toPlainText()
-        lipides=self.cont3.toPlainText()
+        self.proteines=self.cont1.toPlainText()
+        self.calories=self.cont2.toPlainText()
+        self.lipides=self.cont3.toPlainText()
 
-        if proteines and calories and lipides:
-            constraints.append(["proteines", proteines])
-            constraints.append(["calories", calories])
-            constraints.append(["lipides", lipides])
+        if self.proteines and self.calories and self.lipides:
+            constraints.append(["proteines", self.proteines])
+            constraints.append(["calories", self.calories])
+            constraints.append(["lipides", self.lipides])
             #add the constraints to the table
             for i in range(3):
                 row_position = self.table2.rowCount()
@@ -131,32 +132,41 @@ class Window1(QtWidgets.QMainWindow):
 
     def optimise(self):
         print("Optimising...")
-        proteines=self.cont1.toPlainText()
-        calories=self.cont2.toPlainText()
-        lipides=self.cont3.toPlainText()
-        nb_items = len(items)
-        names = [item[0] for item in items]
-        cout = [int(item[4]) for item in items]
-        constraintsInf= []
-        constraintsSup = []
+        if items and constraints and self.proteines and self.calories and self.lipides:
+            nb_items = len(items)
+            names = [item[0] for item in items]
+            cout = [int(item[4]) for item in items]
+            constraintsInf= []
+            constraintsSup = []
+            self.result.show()
 
-        for i in range(len(constraints)):
-            temp = [0]*nb_items
-            for j in range(nb_items):
-                if constraints[i][0] == names[j]:
-                    temp[j] = 1
-                    break
-            temp.append(int(constraints[i][1]))
-            constraintsSup.append(temp)
-        const = [proteines, calories, lipides]
-        for i in range(3):
-            temp = []
-            for j in range(nb_items):
-                temp.append(items[j][i+1])
-            temp.append(int(const[i]))
-            constraintsInf.append(temp)
-        # call the optimization function to get the result 
-        x=optimize(nb_items, names, cout, constraintsInf, constraintsSup)
+            for i in range(len(constraints)):
+                temp = [0]*nb_items
+                for j in range(nb_items):
+                    if constraints[i][0] == names[j]:
+                        temp[j] = 1
+                        break
+                temp.append(int(constraints[i][1]))
+                constraintsSup.append(temp)
+            const = [self.proteines, self.calories, self.lipides]
+            for i in range(3):
+                temp = []
+                for j in range(nb_items):
+                    temp.append(items[j][i+1])
+                temp.append(int(const[i]))
+                constraintsInf.append(temp)
+            # call the optimization function to get the result 
+            x=optimize(nb_items, names, cout, constraintsInf, constraintsSup)
+            # Clear existing table content
+            self.result.clearContents()
+            print(x)
 
-#bech taccedi lel partie eli bech tekteb feha self.result
+            # # Set row and column count
+            # self.result.setRowCount(len(items))
+
+            # for i in range(nb_items):
+            #     self.result.setItem(i, 0, QtWidgets.QTableWidgetItem(str(items[i])))
+                # self.result.setItem(i, 1, QtWidgets.QTableWidgetItem(str(x[i])))
+
+
 
