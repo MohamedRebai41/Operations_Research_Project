@@ -1,6 +1,9 @@
 from PyQt5 import QtWidgets, uic
 import sys
-sys.path.append('..')
+import os
+
+parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(parent_dir)
 from Scheduling.model import schedule
 
 tasks = []
@@ -147,18 +150,18 @@ class Window2(QtWidgets.QMainWindow):
 
     def calculate(self):
         try:
-            result = schedule(len(tasks), len(resources), tasks_resources, priority)
-            self.resultTable.show()
-            self.resultTable.setRowCount(len(tasks))
-            for i in enumerate(tasks):
-                resource_text = ', '.join([result[i]])
+            result = schedule(len(tasks), len(resources), tasks_resources, priority)["plan"]
+            print(result)
+            self.resTable.show()
+            self.resTable.setRowCount(len(tasks))
+            for i in range(len(result)):
+                resource_text = ', '.join([str(x) for x in result[i]])
                 self.resTable.setItem(i, 0, QtWidgets.QTableWidgetItem("Session " + str(i)))
                 self.resTable.setItem(i, 1, QtWidgets.QTableWidgetItem(resource_text))
             self.resTable.resizeColumnsToContents()
-            print(result)
         except Exception as e:
             print(e)
-            self.resultLabel.setText("Error: " + str(e))
+            self.resLabel.setText("Error: " + str(e))
 
 
        
