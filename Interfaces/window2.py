@@ -1,4 +1,7 @@
 from PyQt5 import QtWidgets, uic
+import sys
+sys.path.append('..')
+from Scheduling.model import schedule
 
 tasks = []
 resources = []
@@ -38,7 +41,7 @@ class Window2(QtWidgets.QMainWindow):
         super(Window2, self).__init__()
         uic.loadUi('./window2.ui', self)
         #set window title
-        self.setWindowTitle("Tasks and Resources")
+        self.setWindowTitle("Scheduling")
         self.button2.clicked.connect(self.getResourses)
         self.button2.setStyleSheet("background-color: #8c4669; color: white;")
         self.button3.setStyleSheet("background-color: #8c4669; color: white;")
@@ -49,6 +52,8 @@ class Window2(QtWidgets.QMainWindow):
         self.button5.clicked.connect(self.open_dialog_priority)
         self.button6.setStyleSheet("background-color: #8c4669; color: white;")
         self.button6.clicked.connect(self.clear2)
+        self.calc.setStyleSheet("background-color: #8c4669; color: white;")
+        self.calc.clicked.connect(self.calculate)
         self.table.setColumnCount(3)  
         self.hideWidgets()
 
@@ -84,7 +89,6 @@ class Window2(QtWidgets.QMainWindow):
         
     def open_dialog_priority(self):
         dialog = AddPriorityDialog()
-        #aset title to pripority
         dialog.setWindowTitle("Priority")
         if dialog.exec_() == QtWidgets.QDialog.Accepted:
             task1, task2 = dialog.getPriority()
@@ -140,5 +144,22 @@ class Window2(QtWidgets.QMainWindow):
 
     def showInputWidgets(self):
         self.showWidgets()
+
+    def calculate(self):
+        try:
+            result = schedule(len(tasks), len(resources), tasks_resources, priority)
+            # self.resultTable.show()
+            # self.resultTable.setRowCount(len(tasks))
+            # for i, task in enumerate(tasks):
+            #     resource_text = ', '.join([result[index] for index in tasks_resources[i]])
+            #     self.resTable.setItem(i, 0, QtWidgets.QTableWidgetItem(task))
+            #     self.resTable.setItem(i, 1, QtWidgets.QTableWidgetItem(resource_text))
+            # self.resTable.resizeColumnsToContents()
+            print(result)
+        except Exception as e:
+            print(e)
+            
+
+       
 
 
