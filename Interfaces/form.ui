@@ -72,11 +72,18 @@
    <widget class="QPushButton" name="button1">
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>190</y>
-      <width>83</width>
-      <height>29</height>
+      <x>230</x>
+      <y>300</y>
+      <width>121</width>
+      <height>61</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+      <bold>true</bold>
+      <underline>true</underline>
+     </font>
     </property>
     <property name="text">
      <string>Projet 1</string>
@@ -85,11 +92,18 @@
    <widget class="QPushButton" name="button2">
     <property name="geometry">
      <rect>
-      <x>420</x>
-      <y>190</y>
-      <width>83</width>
-      <height>29</height>
+      <x>440</x>
+      <y>300</y>
+      <width>121</width>
+      <height>61</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+      <bold>true</bold>
+      <underline>true</underline>
+     </font>
     </property>
     <property name="text">
      <string>Projet 2</string>
@@ -101,10 +115,10 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>240</x>
+      <x>200</x>
       <y>40</y>
-      <width>311</width>
-      <height>31</height>
+      <width>411</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="palette">
@@ -154,7 +168,7 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>20</pointsize>
       <italic>true</italic>
       <bold>true</bold>
      </font>
@@ -166,11 +180,16 @@
    <widget class="QLabel" name="label1">
     <property name="geometry">
      <rect>
-      <x>110</x>
+      <x>310</x>
       <y>110</y>
-      <width>131</width>
+      <width>211</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>Amina Ghannem</string>
@@ -179,11 +198,16 @@
    <widget class="QLabel" name="label2">
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>110</y>
-      <width>131</width>
+      <x>310</x>
+      <y>150</y>
+      <width>181</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>Mohamed Rebai</string>
@@ -192,11 +216,16 @@
    <widget class="QLabel" name="label3">
     <property name="geometry">
      <rect>
-      <x>410</x>
-      <y>110</y>
-      <width>131</width>
+      <x>310</x>
+      <y>190</y>
+      <width>201</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>Melek Bensnoussi</string>
@@ -205,11 +234,16 @@
    <widget class="QLabel" name="label4">
     <property name="geometry">
      <rect>
-      <x>560</x>
-      <y>110</y>
-      <width>131</width>
+      <x>310</x>
+      <y>230</y>
+      <width>191</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>Skander Tebourbi</string>
