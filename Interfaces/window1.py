@@ -35,9 +35,7 @@ class AddConstraintDialog(QtWidgets.QDialog):
 
 items=[]
 constraints=[]
-# proteines=-1
-# calories=-1
-# lipides=-1
+
 
 class Window1(QtWidgets.QMainWindow):
     def __init__(self):
@@ -146,7 +144,7 @@ class Window1(QtWidgets.QMainWindow):
                         break
                 temp.append(int(constraints[i][1]))
                 constraintsSup.append(temp)
-            const = [proteines, calories, lipides]
+            const = [self.proteines, self.calories, self.lipides]
             for i in range(3):
                 temp = []
                 for j in range(nb_items):
