@@ -58,10 +58,10 @@ class Window1(QtWidgets.QMainWindow):
         self.calories=self.cont2.toPlainText()
         self.lipides=self.cont3.toPlainText()
 
-        if proteines and calories and lipides:
-            constraints.append(["proteines", proteines])
-            constraints.append(["calories", calories])
-            constraints.append(["lipides", lipides])
+        if self.proteines and self.calories and self.lipides:
+            constraints.append(["proteines", self.proteines])
+            constraints.append(["calories", self.calories])
+            constraints.append(["lipides", self.lipides])
             #add the constraints to the table
             for i in range(3):
                 row_position = self.table2.rowCount()
