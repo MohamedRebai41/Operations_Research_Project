@@ -92,6 +92,8 @@ class Window2(QtWidgets.QMainWindow):
     def clear(self):
         self.table.setRowCount(0)
         tasks_resources.clear()
+        for i in range(len(tasks)):
+            tasks_resources.append([])
 
     def clear2(self):
         self.table2.setRowCount(0)
@@ -109,13 +111,14 @@ class Window2(QtWidgets.QMainWindow):
         self.text2.clear()
         self.hideWidgets()
         self.clearButton.hide()
+        self.resTable.hide()
         
     def open_dialog_priority(self):
         dialog = AddPriorityDialog()
         dialog.setWindowTitle("Priority")
         if dialog.exec_() == QtWidgets.QDialog.Accepted:
             task1, task2 = dialog.getPriority()
-            if task1 and task2:
+            if task1 and task2 and (tasks.index(task1), tasks.index(task2)) not in priority and task1 != task2:
                 row_position = self.table2.rowCount()
                 self.table2.insertRow(row_position)
                 self.table2.setItem(row_position, 0, QtWidgets.QTableWidgetItem(task1))
@@ -133,6 +136,8 @@ class Window2(QtWidgets.QMainWindow):
             if not res_num.isdigit() or not task_num.isdigit():
                 self.show_error_message("Please enter a valid number")
                 return
+            self.clear()
+            self.clear2()
             resources.clear()
             for i in range(int(res_num)):
                 resources.append('Resource ' + str(i))
@@ -147,7 +152,7 @@ class Window2(QtWidgets.QMainWindow):
         dialog.setWindowTitle("Tasks and Resources")
         if dialog.exec_() == QtWidgets.QDialog.Accepted:
             task, resource = dialog.getTasks()
-            if task and resource:
+            if task and resource and resources.index(resource) not in tasks_resources[tasks.index(task)]:
                 row_position = self.table.rowCount()
                 self.table.insertRow(row_position)
                 self.table.setItem(row_position, 0, QtWidgets.QTableWidgetItem(task))
@@ -184,7 +189,7 @@ class Window2(QtWidgets.QMainWindow):
             self.resTable.resizeColumnsToContents()
         except Exception as e:
             print(e)
-            self.show_error_message(str(e))         
+            self.show_error_message(str(e))    
         
 
     def show_error_message(self,message):
