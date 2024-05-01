@@ -53,7 +53,7 @@ def optimize(nb_items,names,cout,contraintesInf,contrainteSup):
     model.update()
     model.optimize()
     if(model.status == GRB.OPTIMAL):
-        print("Optimal solution found")
+        print("Optimal solution found using Gurobi")
         return format_result(x)
     else:
         print("No solution found")
@@ -63,9 +63,11 @@ def main():
     names = ["x1","x2","x3","x4","x5","x6"]
     cout = [3,24,13,9,20,19]
     contraintesInf = [[110,205,160,160,420,260,2000],[4,32,13,8,4,14,55],[2,12,54,285,22,80,800]]
-    contrainteSup = [[1,0,0,0,0,0,4],[0,1,0,0,0,0,3],[0,0,1,0,0,0,2],[0,0,0,1,0,0,8],[0,0,0,0,1,0,2],[0,0,0,0,0,1,2]]
-    temp = optimize(6,names,cout,contraintesInf,contrainteSup)
-    print(temp)
+    contraintesSup = [[1,0,0,0,0,0,4],[0,1,0,0,0,0,3],[0,0,1,0,0,0,2],[0,0,0,1,0,0,8],[0,0,0,0,1,0,2],[0,0,0,0,0,1,2]]
+    temp = optimize(6,names,cout,contraintesInf,contraintesSup)
+    for i in range(len(temp)):
+        print(f"{names[i]}: {temp[i]}")
 
 if __name__ == "__main__":
     main()
+    

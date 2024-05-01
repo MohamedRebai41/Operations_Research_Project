@@ -5,8 +5,8 @@ from PyQt5.QtWidgets import QMessageBox
 
 parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(parent_dir)
+from Nutrition.model import optimize
 
-# from Nutrition.model import optimize
 class AddItemDialog(QtWidgets.QDialog):
     def __init__(self):
         super(AddItemDialog, self).__init__()
@@ -40,6 +40,9 @@ class AddConstraintDialog(QtWidgets.QDialog):
         return None, None
 
 items=[]
+proteines=0
+calories=0
+lipides=0
 constraints=[]
 proteines=0
 calories=0
