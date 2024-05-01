@@ -185,6 +185,7 @@ class Window2(QtWidgets.QMainWindow):
 
     def calculate(self):
         try:
+            self.resTable.setRowCount(0)
             result = schedule(len(tasks), len(resources), tasks_resources, priority)["plan"]
             print(result)
             if not result:
@@ -195,7 +196,7 @@ class Window2(QtWidgets.QMainWindow):
                 return
             self.resLabel.hide()
             self.resTable.show()
-            self.resTable.setRowCount(len(tasks))
+            self.resTable.setRowCount(len(result))
             for i in range(len(result)):
                 resource_text = ', '.join([str(x) for x in result[i]])
                 self.resTable.setItem(i, 0, QtWidgets.QTableWidgetItem("Session " + str(i)))
