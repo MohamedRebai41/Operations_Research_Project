@@ -258,6 +258,7 @@ class Window1(QtWidgets.QMainWindow):
                         self.result.setItem(i, 1, QtWidgets.QTableWidgetItem(str(x[i])))
                     print("Optimisation done")
                 else :
+                    self.resLabel.show()
                     self.resLabel.setText("No solution found")
                     self.resLabel.adjustSize()
                     self.result.hide()
