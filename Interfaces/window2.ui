@@ -7,8 +7,66 @@
     <x>0</x>
     <y>0</y>
     <width>954</width>
-    <height>613</height>
+    <height>765</height>
    </rect>
+  </property>
+  <property name="palette">
+   <palette>
+    <active>
+     <colorrole role="BrightText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="ButtonText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>140</red>
+        <green>70</green>
+        <blue>105</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </active>
+    <inactive>
+     <colorrole role="BrightText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="ButtonText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>140</red>
+        <green>70</green>
+        <blue>105</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </inactive>
+    <disabled>
+     <colorrole role="BrightText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </disabled>
+   </palette>
+  </property>
+  <property name="focusPolicy">
+   <enum>Qt::TabFocus</enum>
   </property>
   <property name="windowTitle">
    <string>Form</string>
@@ -17,14 +75,42 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>90</y>
-     <width>141</width>
+     <y>130</y>
+     <width>181</width>
      <height>20</height>
     </rect>
    </property>
+   <property name="palette">
+    <palette>
+     <active>
+      <colorrole role="WindowText">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>140</red>
+         <green>70</green>
+         <blue>105</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </active>
+     <inactive>
+      <colorrole role="WindowText">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>140</red>
+         <green>70</green>
+         <blue>105</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </inactive>
+     <disabled/>
+    </palette>
+   </property>
    <property name="font">
     <font>
-     <pointsize>11</pointsize>
+     <pointsize>12</pointsize>
+     <bold>true</bold>
     </font>
    </property>
    <property name="text">
@@ -34,8 +120,8 @@
   <widget class="QTextEdit" name="text1">
    <property name="geometry">
     <rect>
-     <x>210</x>
-     <y>90</y>
+     <x>260</x>
+     <y>130</y>
      <width>81</width>
      <height>31</height>
     </rect>
@@ -44,8 +130,8 @@
   <widget class="QTextEdit" name="text2">
    <property name="geometry">
     <rect>
-     <x>210</x>
-     <y>140</y>
+     <x>260</x>
+     <y>180</y>
      <width>81</width>
      <height>31</height>
     </rect>
@@ -55,14 +141,42 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>140</y>
-     <width>181</width>
+     <y>180</y>
+     <width>221</width>
      <height>20</height>
     </rect>
    </property>
+   <property name="palette">
+    <palette>
+     <active>
+      <colorrole role="WindowText">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>140</red>
+         <green>70</green>
+         <blue>105</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </active>
+     <inactive>
+      <colorrole role="WindowText">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>140</red>
+         <green>70</green>
+         <blue>105</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </inactive>
+     <disabled/>
+    </palette>
+   </property>
    <property name="font">
     <font>
-     <pointsize>11</pointsize>
+     <pointsize>12</pointsize>
+     <bold>true</bold>
     </font>
    </property>
    <property name="text">
@@ -73,14 +187,14 @@
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>240</y>
+     <y>290</y>
      <width>381</width>
      <height>221</height>
     </rect>
    </property>
    <column>
     <property name="text">
-     <string>Nouvelle colonne</string>
+     <string>Task</string>
     </property>
    </column>
    <column>
@@ -97,8 +211,8 @@
   <widget class="QPushButton" name="button2">
    <property name="geometry">
     <rect>
-     <x>310</x>
-     <y>110</y>
+     <x>360</x>
+     <y>150</y>
      <width>83</width>
      <height>29</height>
     </rect>
@@ -111,14 +225,42 @@
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>200</y>
+     <y>250</y>
      <width>141</width>
      <height>20</height>
     </rect>
    </property>
+   <property name="palette">
+    <palette>
+     <active>
+      <colorrole role="WindowText">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>140</red>
+         <green>70</green>
+         <blue>105</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </active>
+     <inactive>
+      <colorrole role="WindowText">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>140</red>
+         <green>70</green>
+         <blue>105</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </inactive>
+     <disabled/>
+    </palette>
+   </property>
    <property name="font">
     <font>
-     <pointsize>11</pointsize>
+     <pointsize>12</pointsize>
+     <bold>true</bold>
     </font>
    </property>
    <property name="text">
@@ -129,7 +271,7 @@
    <property name="geometry">
     <rect>
      <x>240</x>
-     <y>200</y>
+     <y>250</y>
      <width>83</width>
      <height>29</height>
     </rect>
@@ -142,13 +284,206 @@
    <property name="geometry">
     <rect>
      <x>340</x>
-     <y>200</y>
+     <y>250</y>
      <width>83</width>
      <height>29</height>
     </rect>
    </property>
    <property name="text">
     <string>Clear</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="button5">
+   <property name="geometry">
+    <rect>
+     <x>690</x>
+     <y>250</y>
+     <width>83</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Add</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="button6">
+   <property name="geometry">
+    <rect>
+     <x>790</x>
+     <y>250</y>
+     <width>83</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Clear</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label1">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>250</y>
+     <width>81</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="palette">
+    <palette>
+     <active>
+      <colorrole role="WindowText">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>140</red>
+         <green>70</green>
+         <blue>105</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </active>
+     <inactive>
+      <colorrole role="WindowText">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>140</red>
+         <green>70</green>
+         <blue>105</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </inactive>
+     <disabled/>
+    </palette>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Priority:</string>
+   </property>
+  </widget>
+  <widget class="QTableWidget" name="table2">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>290</y>
+     <width>381</width>
+     <height>221</height>
+    </rect>
+   </property>
+   <column>
+    <property name="text">
+     <string>Task 1</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Task 2</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Delete</string>
+    </property>
+   </column>
+  </widget>
+  <widget class="QPushButton" name="calc">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>570</y>
+     <width>141</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+     <italic>true</italic>
+     <bold>true</bold>
+     <underline>true</underline>
+    </font>
+   </property>
+   <property name="text">
+    <string>Optimiser</string>
+   </property>
+  </widget>
+  <widget class="QTableWidget" name="resTable">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>540</y>
+     <width>291</width>
+     <height>192</height>
+    </rect>
+   </property>
+   <column>
+    <property name="text">
+     <string>Session</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Tasks</string>
+    </property>
+   </column>
+  </widget>
+  <widget class="QPushButton" name="clearButton">
+   <property name="geometry">
+    <rect>
+     <x>572</x>
+     <y>140</y>
+     <width>151</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Clear All</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>30</y>
+     <width>721</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>20</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string> Problème PLNE: Planification de tâches</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="resLabel">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>590</y>
+     <width>441</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>

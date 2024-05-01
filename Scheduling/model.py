@@ -9,11 +9,11 @@ def schedule(nb_tasks,nb_resources,tasks,priorities):
     """
     validate_input(nb_tasks,nb_resources,tasks,priorities)
     edge_list = build_graph(tasks)
-    return schedule_(nb_tasks,edge_list,priorities)
+    return get_session_plan(schedule_(nb_tasks,edge_list,priorities))
 
 
 def build_graph(tasks):
-    resources=len(tasks)*[[]]
+    resources=[[] for _ in tasks]
     for i in range(len(tasks)):
         for res in tasks[i]:
             resources[res].append(i)
@@ -40,7 +40,7 @@ def validate_input(nb_tasks,nb_resources,tasks,priorities):
         if(pr[0]<0 or pr[0]>=nb_tasks):
             raise Exception(f"The task {pr[1]} does not exist")
 
-def schedule_(n,edge_list,priority_edges):
+def schedule_(n,edge_list,priority_edges=[]):
     """
         - The Problem is defined using two graphs:
             - A graph that defines the coloring problem: edge_list
@@ -51,10 +51,13 @@ def schedule_(n,edge_list,priority_edges):
         - Returns a dictionary that has two fields: number of colors and assignment
     """
     m = Model("graph_coloring")
-
+    m.setParam('OutputFlag', 0)
     # Create variables
     x = m.addVars(n,n, vtype=GRB.BINARY, name = "x")
     w = m.addVars(n, vtype=GRB.BINARY, name = "w")
+
+
+
 
     # Set objective: Minimizing the number of colors used
     m.setObjective(sum(w[c] for c in range(n)), GRB.MINIMIZE)
@@ -71,8 +74,11 @@ def schedule_(n,edge_list,priority_edges):
         m.addConstr(w[c-1]>=w[c])
     #Topological sort constraints
     for i,j in priority_edges:
-        for c in range(n-1):
-            m.addConstr(sum(x[i,k] for k in range(c+1) ) <= sum(x[j,k] for k in range(c)))
+        for c in range(n):
+            m.addConstr(sum(x[i,k] for k in range(c)) >= sum(x[j,k] for k in range(c)))
+    for i,j in priority_edges:
+        for c in range(n):
+            m.addConstr(x[i,c] + x[j,c] <= w[c])
     # Optimize model
     m.optimize()
     if m.status != GRB.OPTIMAL:
@@ -92,4 +98,16 @@ def format_results(model,n):
     return {
         'nb_colors':nb_colors,
         'assignment': assignment
+    }
+
+def get_session_plan(data):
+    if(data == False):
+        return {
+            'plan': False
+        }
+    plan = [[] for _ in range(data["nb_colors"])]
+    for i in range(len(data["assignment"])):
+        plan[data["assignment"][i]].append(i)
+    return {
+        'plan': plan
     }
