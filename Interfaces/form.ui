@@ -86,7 +86,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Projet 1</string>
+     <string>Probleme 1</string>
     </property>
    </widget>
    <widget class="QPushButton" name="button2">
@@ -106,7 +106,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Projet 2</string>
+     <string>Probleme 2</string>
     </property>
    </widget>
    <widget class="QLabel" name="title">

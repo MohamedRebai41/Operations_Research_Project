@@ -120,7 +120,7 @@
   <widget class="QTextEdit" name="text1">
    <property name="geometry">
     <rect>
-     <x>250</x>
+     <x>260</x>
      <y>130</y>
      <width>81</width>
      <height>31</height>
@@ -130,7 +130,7 @@
   <widget class="QTextEdit" name="text2">
    <property name="geometry">
     <rect>
-     <x>250</x>
+     <x>260</x>
      <y>180</y>
      <width>81</width>
      <height>31</height>
@@ -211,7 +211,7 @@
   <widget class="QPushButton" name="button2">
    <property name="geometry">
     <rect>
-     <x>350</x>
+     <x>360</x>
      <y>150</y>
      <width>83</width>
      <height>29</height>
@@ -408,7 +408,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Optimise</string>
+    <string>Optimiser</string>
    </property>
   </widget>
   <widget class="QTableWidget" name="resTable">

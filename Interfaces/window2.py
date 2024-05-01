@@ -177,19 +177,20 @@ class Window2(QtWidgets.QMainWindow):
         self.showWidgets()
 
     def calculate(self):
-        try:
-            result = schedule(len(tasks), len(resources), tasks_resources, priority)["plan"]
-            print(result)
-            self.resTable.show()
-            self.resTable.setRowCount(len(tasks))
-            for i in range(len(result)):
-                resource_text = ', '.join([str(x) for x in result[i]])
-                self.resTable.setItem(i, 0, QtWidgets.QTableWidgetItem("Session " + str(i)))
-                self.resTable.setItem(i, 1, QtWidgets.QTableWidgetItem(resource_text))
-            self.resTable.resizeColumnsToContents()
-        except Exception as e:
-            print(e)
-            self.show_error_message(str(e))    
+        # try:
+        #     result = schedule(len(tasks), len(resources), tasks_resources, priority)["plan"]
+        #     print(result)
+        #     self.resTable.show()
+        #     self.resTable.setRowCount(len(tasks))
+        #     for i in range(len(result)):
+        #         resource_text = ', '.join([str(x) for x in result[i]])
+        #         self.resTable.setItem(i, 0, QtWidgets.QTableWidgetItem("Session " + str(i)))
+        #         self.resTable.setItem(i, 1, QtWidgets.QTableWidgetItem(resource_text))
+        #     self.resTable.resizeColumnsToContents()
+        # except Exception as e:
+        #     print(e)
+        #     self.show_error_message(str(e))    
+        print("Calculating...")     
         
 
     def show_error_message(self,message):

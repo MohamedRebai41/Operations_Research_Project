@@ -49,6 +49,7 @@ class Window1(QtWidgets.QMainWindow):
     def __init__(self):
         super(Window1, self).__init__()
         uic.loadUi('./window1.ui', self)
+        self.setWindowTitle("Nutrition")
         self.button1.clicked.connect(self.open_dialog)
         self.button1.setStyleSheet("background-color: #8c4669; color: white;")
         self.table1.setColumnCount(6)  
@@ -130,6 +131,7 @@ class Window1(QtWidgets.QMainWindow):
 
     def open_dialog(self):
         dialog = AddItemDialog()
+        dialog.setWindowTitle("Add Element")
         if dialog.exec_() == QtWidgets.QDialog.Accepted:
             item, proteine, calories, calcium, cout = dialog.get_data()
 
@@ -158,6 +160,7 @@ class Window1(QtWidgets.QMainWindow):
 
     def add_constraint(self):
         dialog = AddConstraintDialog()
+        dialog.setWindowTitle("Add Constraint")
         if dialog.exec_() == QtWidgets.QDialog.Accepted:
             constraint, valeur = dialog.get_data()
 
