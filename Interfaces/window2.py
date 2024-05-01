@@ -134,6 +134,9 @@ class Window2(QtWidgets.QMainWindow):
     def getResourses(self):
         res_num = self.text2.toPlainText()
         task_num = self.text1.toPlainText()
+        if not(res_num) or not(task_num):
+            self.show_error_message("Please complete all the fields")
+            return
         if res_num and task_num :
             if not res_num.isdigit() or not task_num.isdigit():
                 self.show_error_message("Please enter a valid number")
@@ -180,14 +183,13 @@ class Window2(QtWidgets.QMainWindow):
     def calculate(self):
         try:
             result = schedule(len(tasks), len(resources), tasks_resources, priority)["plan"]
+            print(result)
             if not result:
                 self.resLabel.show()
                 self.resLabel.setText("Pas de solution trouvée. Il existe une relation cyclique de priorité")
                 self.resLabel.adjustSize()
                 self.resTable.hide()
                 return
-
-            print(result)
             self.resLabel.hide()
             self.resTable.show()
             self.resTable.setRowCount(len(tasks))
