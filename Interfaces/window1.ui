@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>855</width>
+    <width>882</width>
     <height>1123</height>
    </rect>
   </property>
@@ -680,6 +680,25 @@
    </property>
    <property name="text">
     <string>Clear</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>30</y>
+     <width>781</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string> Problème PL: Optimisation du Regime Alimentaire</string>
    </property>
   </widget>
  </widget>
