@@ -64,7 +64,8 @@ class Window1(QtWidgets.QMainWindow):
         self.add2.clicked.connect(self.getCalories)
         self.add3.setStyleSheet("background-color: #8c4669; color: white;")
         self.add3.clicked.connect(self.getCalcium)
-
+        self.clearButton.setStyleSheet("background-color: #8c4669; color: white;")
+        self.clearButton.clicked.connect(self.clearAll)
         self.result.hide()
 
     def getProteines(self):
@@ -127,6 +128,19 @@ class Window1(QtWidgets.QMainWindow):
             else :
                 self.show_error_message("Please enter a valid input")
                 return
+            
+    
+    def clearAll(self):
+        self.table1.setRowCount(0)
+        self.table2.setRowCount(0)
+        self.result.setRowCount(0)
+        items.clear()
+        constraints.clear()
+        self.cont1.clear()
+        self.cont2.clear()
+        self.cont3.clear()
+        self.result.hide()
+        self.result.clearContents()
 
 
     def open_dialog(self):
