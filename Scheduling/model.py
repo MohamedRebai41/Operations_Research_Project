@@ -101,7 +101,7 @@ def format_results(model,n):
     }
 
 def get_session_plan(data):
-    plan = [[] for _ in len(data["nb_colors"])]
+    plan = [[] for _ in range(data["nb_colors"])]
     for i in range(len(data["assignment"])):
         plan[data["assignment"][i]].append(i)
     return {
