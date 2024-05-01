@@ -29,23 +29,12 @@ def validate_input(nb_items,names,cout,contraintesInf,contrainteSup):
         raise Exception("The data is incomplete names")
     if(len(cout) !=nb_items):
         raise Exception("The data is incomplete cout")
-    # chck if all are numbers
-    for i in range(nb_items):
-        if(not isinstance(cout[i],(int,float))):
-            raise Exception("data type error in cout")
     for contrainte in contraintesInf:
         if(len(contrainte) != nb_items+1):
             raise Exception("The data is incomplete")
-        for i in range(contrainte):
-            if(not isinstance(contrainte[i],(int,float))):
-                raise Exception("data type error in cout")
-            
     for contrainte in contrainteSup:
         if(len(contrainte) != nb_items+1):
             raise Exception("The data is incomplete")
-        for i in range(contrainte):
-            if(not isinstance(contrainte[i],(int,float))):
-                raise Exception("data type error in cout")
 
 def format_result(x):
     result = []
