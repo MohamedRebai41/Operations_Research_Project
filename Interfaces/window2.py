@@ -184,9 +184,11 @@ class Window2(QtWidgets.QMainWindow):
                 self.resLabel.show()
                 self.resLabel.setText("Pas de solution trouvée. Il existe une relation cyclique de priorité")
                 self.resLabel.adjustSize()
+                self.resTable.hide()
                 return
 
             print(result)
+            self.resLabel.hide()
             self.resTable.show()
             self.resTable.setRowCount(len(tasks))
             for i in range(len(result)):
