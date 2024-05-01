@@ -701,6 +701,24 @@
     <string> Problème PL: Optimisation du Regime Alimentaire</string>
    </property>
   </widget>
+  <widget class="QLabel" name="resLabel">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>850</y>
+     <width>451</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

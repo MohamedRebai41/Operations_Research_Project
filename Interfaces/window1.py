@@ -70,6 +70,7 @@ class Window1(QtWidgets.QMainWindow):
         self.clearButton.setStyleSheet("background-color: #8c4669; color: white;")
         self.clearButton.clicked.connect(self.clearAll)
         self.result.hide()
+        self.resLabel.hide()
 
     def getProteines(self):
         for i in range(len(constraints)):
@@ -224,7 +225,6 @@ class Window1(QtWidgets.QMainWindow):
                 cout = [int(item[4]) for item in items]
                 constraintsInf= []
                 constraintsSup = []
-                self.result.show()
 
                 for i in range(len(constraints)):
                     temp = [0]*nb_items
@@ -243,17 +243,24 @@ class Window1(QtWidgets.QMainWindow):
                     constraintsInf.append(temp)
                 # call the optimization function to get the result 
                 x=optimize(nb_items, names, cout, constraintsInf, constraintsSup)
+                if x:
+                    self.result.show()
+                    self.resLabel.hide()
                 # Clear existing table content
-                self.result.clearContents()
-                print(x)
+                    self.result.clearContents()
+                    print(x)
 
-                # Set row and column count
-                self.result.setRowCount(len(items))
+                    # Set row and column count
+                    self.result.setRowCount(len(items))
 
-                for i in range(nb_items):
-                    self.result.setItem(i, 0, QtWidgets.QTableWidgetItem(str(items[i][0])))
-                    self.result.setItem(i, 1, QtWidgets.QTableWidgetItem(str(x[i])))
-                print("Optimisation done")
+                    for i in range(nb_items):
+                        self.result.setItem(i, 0, QtWidgets.QTableWidgetItem(str(items[i][0])))
+                        self.result.setItem(i, 1, QtWidgets.QTableWidgetItem(str(x[i])))
+                    print("Optimisation done")
+                else :
+                    self.resLabel.setText("No solution found")
+                    self.resLabel.adjustSize()
+                    self.result.hide()
             else:
                 self.show_error_message("You need to add the basic constraints first")
                 return
