@@ -5,7 +5,7 @@ import os
 parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(parent_dir)
 
-from Nutrition.model import optimize
+# from Nutrition.model import optimize
 class AddItemDialog(QtWidgets.QDialog):
     def __init__(self):
         super(AddItemDialog, self).__init__()
@@ -40,6 +40,9 @@ class AddConstraintDialog(QtWidgets.QDialog):
 
 items=[]
 constraints=[]
+proteines=False
+calories=False
+lipides=False
 
 class Window1(QtWidgets.QMainWindow):
     def __init__(self):
@@ -58,24 +61,37 @@ class Window1(QtWidgets.QMainWindow):
         self.result.hide()
         
     def getBasicConstraints(self):
-        self.proteines=self.cont1.toPlainText()
-        self.calories=self.cont2.toPlainText()
-        self.lipides=self.cont3.toPlainText()
+        test=True
+        for i in range(len(constraints)):
+            if constraints[i][0] == "proteines":
+                test=False
+                break
+            if constraints[i][0] == "calories":
+                test=False
+                break
+            if constraints[i][0] == "lipides":
+                test=False
+                break
 
-        if self.proteines and self.calories and self.lipides:
-            constraints.append(["proteines", self.proteines])
-            constraints.append(["calories", self.calories])
-            constraints.append(["lipides", self.lipides])
-            #add the constraints to the table
-            for i in range(3):
-                row_position = self.table2.rowCount()
-                self.table2.insertRow(row_position)
-                self.table2.setItem(row_position, 0, QtWidgets.QTableWidgetItem(constraints[i][0]))
-                self.table2.setItem(row_position, 1, QtWidgets.QTableWidgetItem(constraints[i][1]))
-                delete_button = QtWidgets.QPushButton("Delete")
-                delete_button.clicked.connect(lambda _, row=row_position: self.delete_row2(row))
-                self.table2.setCellWidget(row_position, 2, delete_button)
-    
+        if test:
+            self.proteines=self.cont1.toPlainText()
+            self.calories=self.cont2.toPlainText()
+            self.lipides=self.cont3.toPlainText()
+
+            if self.proteines and self.calories and self.lipides:
+                constraints.append(["proteines", self.proteines])
+                constraints.append(["calories", self.calories])
+                constraints.append(["lipides", self.lipides])
+                #add the constraints to the table
+                for i in range(3):
+                    row_position = self.table2.rowCount()
+                    self.table2.insertRow(row_position)
+                    self.table2.setItem(row_position, 0, QtWidgets.QTableWidgetItem(constraints[i][0]))
+                    self.table2.setItem(row_position, 1, QtWidgets.QTableWidgetItem(constraints[i][1]))
+                    delete_button = QtWidgets.QPushButton("Delete")
+                    delete_button.clicked.connect(lambda _, row=row_position: self.delete_row2(row))
+                    self.table2.setCellWidget(row_position, 2, delete_button)
+        
 
     def open_dialog(self):
         dialog = AddItemDialog()
@@ -132,41 +148,42 @@ class Window1(QtWidgets.QMainWindow):
 
     def optimise(self):
         print("Optimising...")
-        if items and constraints and self.proteines and self.calories and self.lipides:
-            nb_items = len(items)
-            names = [item[0] for item in items]
-            cout = [int(item[4]) for item in items]
-            constraintsInf= []
-            constraintsSup = []
-            self.result.show()
+        # if items and constraints and self.proteines and self.calories and self.lipides:
+        #     nb_items = len(items)
+        #     names = [item[0] for item in items]
+        #     cout = [int(item[4]) for item in items]
+        #     constraintsInf= []
+        #     constraintsSup = []
+        #     self.result.show()
 
-            for i in range(len(constraints)):
-                temp = [0]*nb_items
-                for j in range(nb_items):
-                    if constraints[i][0] == names[j]:
-                        temp[j] = 1
-                        break
-                temp.append(int(constraints[i][1]))
-                constraintsSup.append(temp)
-            const = [self.proteines, self.calories, self.lipides]
-            for i in range(3):
-                temp = []
-                for j in range(nb_items):
-                    temp.append(items[j][i+1])
-                temp.append(int(const[i]))
-                constraintsInf.append(temp)
-            # call the optimization function to get the result 
-            x=optimize(nb_items, names, cout, constraintsInf, constraintsSup)
-            # Clear existing table content
-            self.result.clearContents()
-            print(x)
+        #     for i in range(len(constraints)):
+        #         temp = [0]*nb_items
+        #         for j in range(nb_items):
+        #             if constraints[i][0] == names[j]:
+        #                 temp[j] = 1
+        #                 break
+        #         temp.append(int(constraints[i][1]))
+        #         constraintsSup.append(temp)
+        #     const = [self.proteines, self.calories, self.lipides]
+        #     for i in range(3):
+        #         temp = []
+        #         for j in range(nb_items):
+        #             temp.append(items[j][i+1])
+        #         temp.append(int(const[i]))
+        #         constraintsInf.append(temp)
+        #     # call the optimization function to get the result 
+        #     x=optimize(nb_items, names, cout, constraintsInf, constraintsSup)
+        #     # Clear existing table content
+        #     self.result.clearContents()
+        #     print(x)
 
-            # # Set row and column count
-            self.result.setRowCount(len(items))
+        #     # # Set row and column count
+        #     self.result.setRowCount(len(items))
 
-            for i in range(nb_items):
-                self.result.setItem(i, 0, QtWidgets.QTableWidgetItem(str(items[i][0])))
-                self.result.setItem(i, 1, QtWidgets.QTableWidgetItem(str(x[i])))
+        #     for i in range(nb_items):
+        #         self.result.setItem(i, 0, QtWidgets.QTableWidgetItem(str(items[i][0])))
+        #         self.result.setItem(i, 1, QtWidgets.QTableWidgetItem(str(x[i])))
+        print("Optimisation done")
 
 
 

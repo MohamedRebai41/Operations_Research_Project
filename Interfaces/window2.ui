@@ -236,9 +236,9 @@
       <colorrole role="WindowText">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>0</red>
-         <green>0</green>
-         <blue>0</blue>
+         <red>140</red>
+         <green>70</green>
+         <blue>105</blue>
         </color>
        </brush>
       </colorrole>
@@ -247,9 +247,9 @@
       <colorrole role="WindowText">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>0</red>
-         <green>0</green>
-         <blue>0</blue>
+         <red>140</red>
+         <green>70</green>
+         <blue>105</blue>
         </color>
        </brush>
       </colorrole>
@@ -334,9 +334,9 @@
       <colorrole role="WindowText">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>0</red>
-         <green>0</green>
-         <blue>0</blue>
+         <red>140</red>
+         <green>70</green>
+         <blue>105</blue>
         </color>
        </brush>
       </colorrole>
@@ -345,9 +345,9 @@
       <colorrole role="WindowText">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>0</red>
-         <green>0</green>
-         <blue>0</blue>
+         <red>140</red>
+         <green>70</green>
+         <blue>105</blue>
         </color>
        </brush>
       </colorrole>
@@ -394,7 +394,7 @@
    <property name="geometry">
     <rect>
      <x>70</x>
-     <y>500</y>
+     <y>520</y>
      <width>141</width>
      <height>101</height>
     </rect>
@@ -414,10 +414,15 @@
    <property name="geometry">
     <rect>
      <x>280</x>
-     <y>510</y>
+     <y>500</y>
      <width>221</width>
      <height>121</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string/>
@@ -426,9 +431,9 @@
   <widget class="QTableWidget" name="resTable">
    <property name="geometry">
     <rect>
-     <x>460</x>
+     <x>260</x>
      <y>480</y>
-     <width>401</width>
+     <width>261</width>
      <height>192</height>
     </rect>
    </property>
@@ -442,6 +447,24 @@
      <string>Resources</string>
     </property>
    </column>
+  </widget>
+  <widget class="QPushButton" name="clearButton">
+   <property name="geometry">
+    <rect>
+     <x>572</x>
+     <y>100</y>
+     <width>151</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Clear All</string>
+   </property>
   </widget>
  </widget>
  <resources/>

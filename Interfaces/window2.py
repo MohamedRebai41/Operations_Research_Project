@@ -4,7 +4,7 @@ import os
 
 parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(parent_dir)
-from Scheduling.model import schedule
+# from Scheduling.model import schedule
 
 tasks = []
 resources = []
@@ -19,6 +19,7 @@ class AddTaskDialog(QtWidgets.QDialog):
         self.button.clicked.connect(self.accept)
         self.comboBox.addItems([task for task in tasks])
         self.comboBox2.addItems([resource for resource in resources])
+
 
     def getTasks(self):
         task = self.comboBox.currentText()
@@ -57,7 +58,11 @@ class Window2(QtWidgets.QMainWindow):
         self.button6.clicked.connect(self.clear2)
         self.calc.setStyleSheet("background-color: #8c4669; color: white;")
         self.calc.clicked.connect(self.calculate)
+        self.clearButton.setStyleSheet("background-color: #8c4669; color: white;")
+        self.clearButton.clicked.connect(self.clearAll)
         self.table.setColumnCount(3)  
+        self.resTable.hide()
+        self.resLabel.hide()
         self.hideWidgets()
 
     def hideWidgets(self):
@@ -70,6 +75,7 @@ class Window2(QtWidgets.QMainWindow):
         self.button6.hide()
         self.label1.hide()
         self.calc.hide()
+        self.clearButton.hide()
 
     def showWidgets(self):
         self.table.show()
@@ -81,6 +87,7 @@ class Window2(QtWidgets.QMainWindow):
         self.button6.show()
         self.label1.show()
         self.calc.show()
+        self.clearButton.show()
 
     def clear(self):
         self.table.setRowCount(0)
@@ -89,6 +96,19 @@ class Window2(QtWidgets.QMainWindow):
     def clear2(self):
         self.table2.setRowCount(0)
         priority.clear()
+
+    def clearAll(self):
+        self.table.setRowCount(0)
+        self.table2.setRowCount(0)
+        self.resTable.setRowCount(0)
+        tasks_resources.clear()
+        priority.clear()
+        tasks.clear()
+        resources.clear()
+        self.text1.clear()
+        self.text2.clear()
+        self.hideWidgets()
+        self.clearButton.hide()
         
     def open_dialog_priority(self):
         dialog = AddPriorityDialog()
@@ -149,19 +169,21 @@ class Window2(QtWidgets.QMainWindow):
         self.showWidgets()
 
     def calculate(self):
-        try:
-            result = schedule(len(tasks), len(resources), tasks_resources, priority)["plan"]
-            print(result)
-            self.resTable.show()
-            self.resTable.setRowCount(len(tasks))
-            for i in range(len(result)):
-                resource_text = ', '.join([str(x) for x in result[i]])
-                self.resTable.setItem(i, 0, QtWidgets.QTableWidgetItem("Session " + str(i)))
-                self.resTable.setItem(i, 1, QtWidgets.QTableWidgetItem(resource_text))
-            self.resTable.resizeColumnsToContents()
-        except Exception as e:
-            print(e)
-            self.resLabel.setText("Error: " + str(e))
+        # try:
+        #     result = schedule(len(tasks), len(resources), tasks_resources, priority)["plan"]
+        #     print(result)
+        #     self.resTable.show()
+        #     self.resTable.setRowCount(len(tasks))
+        #     for i in range(len(result)):
+        #         resource_text = ', '.join([str(x) for x in result[i]])
+        #         self.resTable.setItem(i, 0, QtWidgets.QTableWidgetItem("Session " + str(i)))
+        #         self.resTable.setItem(i, 1, QtWidgets.QTableWidgetItem(resource_text))
+        #     self.resTable.resizeColumnsToContents()
+        # except Exception as e:
+        #     print(e)
+        #     self.resLabel.show()
+        #     self.resLabel.setText("Error: " + str(e))
+        print("Calculating")
 
 
        
