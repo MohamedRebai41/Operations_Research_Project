@@ -1,10 +1,11 @@
 from PyQt5 import QtWidgets, uic
 import sys
 import os
+from PyQt5.QtWidgets import QMessageBox
 
 parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(parent_dir)
-from Scheduling.model import schedule
+# from Scheduling.model import schedule
 
 tasks = []
 resources = []
@@ -19,6 +20,7 @@ class AddTaskDialog(QtWidgets.QDialog):
         self.button.clicked.connect(self.accept)
         self.comboBox.addItems([task for task in tasks])
         self.comboBox2.addItems([resource for resource in resources])
+
 
     def getTasks(self):
         task = self.comboBox.currentText()
@@ -57,7 +59,10 @@ class Window2(QtWidgets.QMainWindow):
         self.button6.clicked.connect(self.clear2)
         self.calc.setStyleSheet("background-color: #8c4669; color: white;")
         self.calc.clicked.connect(self.calculate)
+        self.clearButton.setStyleSheet("background-color: #8c4669; color: white;")
+        self.clearButton.clicked.connect(self.clearAll)
         self.table.setColumnCount(3)  
+        self.resTable.hide()
         self.hideWidgets()
 
     def hideWidgets(self):
@@ -70,6 +75,7 @@ class Window2(QtWidgets.QMainWindow):
         self.button6.hide()
         self.label1.hide()
         self.calc.hide()
+        self.clearButton.hide()
 
     def showWidgets(self):
         self.table.show()
@@ -81,6 +87,7 @@ class Window2(QtWidgets.QMainWindow):
         self.button6.show()
         self.label1.show()
         self.calc.show()
+        self.clearButton.show()
 
     def clear(self):
         self.table.setRowCount(0)
@@ -89,6 +96,19 @@ class Window2(QtWidgets.QMainWindow):
     def clear2(self):
         self.table2.setRowCount(0)
         priority.clear()
+
+    def clearAll(self):
+        self.table.setRowCount(0)
+        self.table2.setRowCount(0)
+        self.resTable.setRowCount(0)
+        tasks_resources.clear()
+        priority.clear()
+        tasks.clear()
+        resources.clear()
+        self.text1.clear()
+        self.text2.clear()
+        self.hideWidgets()
+        self.clearButton.hide()
         
     def open_dialog_priority(self):
         dialog = AddPriorityDialog()
@@ -110,6 +130,9 @@ class Window2(QtWidgets.QMainWindow):
         res_num = self.text2.toPlainText()
         task_num = self.text1.toPlainText()
         if res_num and task_num :
+            if not res_num.isdigit() or not task_num.isdigit():
+                self.show_error_message("Please enter a valid number")
+                return
             resources.clear()
             for i in range(int(res_num)):
                 resources.append('Resource ' + str(i))
@@ -161,8 +184,16 @@ class Window2(QtWidgets.QMainWindow):
             self.resTable.resizeColumnsToContents()
         except Exception as e:
             print(e)
-            self.resLabel.setText("Error: " + str(e))
+            self.show_error_message(str(e))         
+        
 
+    def show_error_message(self,message):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Critical)
+        msg.setText("Error")
+        msg.setInformativeText(message)
+        msg.setWindowTitle("Error")
+        msg.exec_()
 
        
 

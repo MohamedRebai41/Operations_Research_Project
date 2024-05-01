@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>954</width>
-    <height>686</height>
+    <height>765</height>
    </rect>
   </property>
   <property name="palette">
@@ -75,7 +75,7 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>90</y>
+     <y>130</y>
      <width>181</width>
      <height>20</height>
     </rect>
@@ -121,7 +121,7 @@
    <property name="geometry">
     <rect>
      <x>250</x>
-     <y>90</y>
+     <y>130</y>
      <width>81</width>
      <height>31</height>
     </rect>
@@ -131,7 +131,7 @@
    <property name="geometry">
     <rect>
      <x>250</x>
-     <y>140</y>
+     <y>180</y>
      <width>81</width>
      <height>31</height>
     </rect>
@@ -141,7 +141,7 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>140</y>
+     <y>180</y>
      <width>221</width>
      <height>20</height>
     </rect>
@@ -187,7 +187,7 @@
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>250</y>
+     <y>290</y>
      <width>381</width>
      <height>221</height>
     </rect>
@@ -212,7 +212,7 @@
    <property name="geometry">
     <rect>
      <x>350</x>
-     <y>110</y>
+     <y>150</y>
      <width>83</width>
      <height>29</height>
     </rect>
@@ -225,7 +225,7 @@
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>210</y>
+     <y>250</y>
      <width>141</width>
      <height>20</height>
     </rect>
@@ -236,9 +236,9 @@
       <colorrole role="WindowText">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>0</red>
-         <green>0</green>
-         <blue>0</blue>
+         <red>140</red>
+         <green>70</green>
+         <blue>105</blue>
         </color>
        </brush>
       </colorrole>
@@ -247,9 +247,9 @@
       <colorrole role="WindowText">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>0</red>
-         <green>0</green>
-         <blue>0</blue>
+         <red>140</red>
+         <green>70</green>
+         <blue>105</blue>
         </color>
        </brush>
       </colorrole>
@@ -271,7 +271,7 @@
    <property name="geometry">
     <rect>
      <x>240</x>
-     <y>210</y>
+     <y>250</y>
      <width>83</width>
      <height>29</height>
     </rect>
@@ -284,7 +284,7 @@
    <property name="geometry">
     <rect>
      <x>340</x>
-     <y>210</y>
+     <y>250</y>
      <width>83</width>
      <height>29</height>
     </rect>
@@ -297,7 +297,7 @@
    <property name="geometry">
     <rect>
      <x>690</x>
-     <y>210</y>
+     <y>250</y>
      <width>83</width>
      <height>29</height>
     </rect>
@@ -310,7 +310,7 @@
    <property name="geometry">
     <rect>
      <x>790</x>
-     <y>210</y>
+     <y>250</y>
      <width>83</width>
      <height>29</height>
     </rect>
@@ -323,7 +323,7 @@
    <property name="geometry">
     <rect>
      <x>490</x>
-     <y>210</y>
+     <y>250</y>
      <width>81</width>
      <height>31</height>
     </rect>
@@ -334,9 +334,9 @@
       <colorrole role="WindowText">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>0</red>
-         <green>0</green>
-         <blue>0</blue>
+         <red>140</red>
+         <green>70</green>
+         <blue>105</blue>
         </color>
        </brush>
       </colorrole>
@@ -345,9 +345,9 @@
       <colorrole role="WindowText">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>0</red>
-         <green>0</green>
-         <blue>0</blue>
+         <red>140</red>
+         <green>70</green>
+         <blue>105</blue>
         </color>
        </brush>
       </colorrole>
@@ -369,7 +369,7 @@
    <property name="geometry">
     <rect>
      <x>490</x>
-     <y>250</y>
+     <y>290</y>
      <width>381</width>
      <height>221</height>
     </rect>
@@ -394,7 +394,7 @@
    <property name="geometry">
     <rect>
      <x>70</x>
-     <y>500</y>
+     <y>570</y>
      <width>141</width>
      <height>101</height>
     </rect>
@@ -404,44 +404,69 @@
      <pointsize>14</pointsize>
      <italic>true</italic>
      <bold>true</bold>
+     <underline>true</underline>
     </font>
    </property>
    <property name="text">
-    <string>Calc</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="resLabel">
-   <property name="geometry">
-    <rect>
-     <x>280</x>
-     <y>510</y>
-     <width>221</width>
-     <height>121</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
+    <string>Optimise</string>
    </property>
   </widget>
   <widget class="QTableWidget" name="resTable">
    <property name="geometry">
     <rect>
-     <x>460</x>
-     <y>480</y>
-     <width>401</width>
+     <x>280</x>
+     <y>540</y>
+     <width>291</width>
      <height>192</height>
     </rect>
    </property>
    <column>
     <property name="text">
-     <string>Nouvelle colonne</string>
+     <string>Session</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>Resources</string>
+     <string>Tasks</string>
     </property>
    </column>
+  </widget>
+  <widget class="QPushButton" name="clearButton">
+   <property name="geometry">
+    <rect>
+     <x>572</x>
+     <y>140</y>
+     <width>151</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Clear All</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>30</y>
+     <width>721</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>20</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string> Problème PLNE: Planification de tâches</string>
+   </property>
   </widget>
  </widget>
  <resources/>
