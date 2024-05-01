@@ -1,4 +1,5 @@
 from PyQt5 import QtWidgets, uic
+from Nutrition import optimize
 
 class AddItemDialog(QtWidgets.QDialog):
     def __init__(self):
@@ -33,21 +34,24 @@ class AddConstraintDialog(QtWidgets.QDialog):
         return None, None
 
 items=[]
+proteines=0
+calories=0
+lipides=0
 constraints=[]
 
 class Window1(QtWidgets.QMainWindow):
-    def __init__(self):
-        super(Window1, self).__init__()
-        uic.loadUi('./window1.ui', self)
-        self.button1.clicked.connect(self.open_dialog)
-        self.button1.setStyleSheet("background-color: #8c4669; color: white;")
-        self.table1.setColumnCount(6)  
-        self.table2.setColumnCount(3)
-        self.add.clicked.connect(self.add_constraint)
-        self.add.setStyleSheet("background-color: #8c4669; color: white;")
-        self.optimise.setStyleSheet("background-color: #8c4669; color: white;")
-        self.add1.setStyleSheet("background-color: #8c4669; color: white;")
-        self.add1.clicked.connect(self.getBasicConstraints)
+    # def __init__(self):
+    #     super(Window1, self).__init__()
+    #     uic.loadUi('./window1.ui', self)
+    #     self.button1.clicked.connect(self.open_dialog)
+    #     self.button1.setStyleSheet("background-color: #8c4669; color: white;")
+    #     self.table1.setColumnCount(6)  
+    #     self.table2.setColumnCount(3)
+    #     self.add.clicked.connect(self.add_constraint)
+    #     self.add.setStyleSheet("background-color: #8c4669; color: white;")
+    #     self.optimise.setStyleSheet("background-color: #8c4669; color: white;")
+    #     self.add1.setStyleSheet("background-color: #8c4669; color: white;")
+    #     self.add1.clicked.connect(self.getBasicConstraints)
         
     def getBasicConstraints(self):
         proteines=self.cont1.toPlainText()
@@ -122,5 +126,34 @@ class Window1(QtWidgets.QMainWindow):
         self.table2.removeRow(row)
         constraints.pop(row)
 
-#bech taccedi lel partie eli bech tekteb feha self.result
+    def optimizeModel(self):
+        #format data
+        nb_items = len(items)
+        names = [item[0] for item in items]
+        cout = [int(item[4]) for item in items]
+        constraintsInf= []
+        constraintsSup = []
 
+        for i in range(len(constraints)):
+            temp = [0]*nb_items
+            for j in range(nb_items):
+                if constraints[i][0] == names[j]:
+                    temp[j] = 1
+                    break
+            temp.append(int(constraints[i][1]))
+            constraintsSup.append(temp)
+        const = [proteines, calories, lipides]
+        for i in range(3):
+            temp = []
+            for j in range(nb_items):
+                temp.append(items[j][i+1])
+            temp.append(int(const[i]))
+            constraintsInf.append(temp)
+        # call the optimization function to get the result 
+        # x=optimize(nb_items, names, cout, constraintsInf, constraintsSup)
+
+
+                
+
+
+#bech taccedi lel partie eli bech tekteb feha self.result
