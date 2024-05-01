@@ -74,7 +74,7 @@ def schedule_(n,edge_list,priority_edges=[]):
         m.addConstr(w[c-1]>=w[c])
     #Topological sort constraints
     for i,j in priority_edges:
-        for c in range(n-1):
+        for c in range(n):
             m.addConstr(sum(x[i,k] for k in range(c)) >= sum(x[j,k] for k in range(c)))
     for i,j in priority_edges:
         for c in range(n):
