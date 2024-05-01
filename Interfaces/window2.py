@@ -141,6 +141,8 @@ class Window2(QtWidgets.QMainWindow):
             self.clear(int(task_num))
             self.clear2()
             resources.clear()
+            self.resLabel.hide()
+            self.resTable.hide()
             for i in range(int(res_num)):
                 resources.append('Resource ' + str(i))
             tasks.clear()
