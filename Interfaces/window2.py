@@ -4,6 +4,7 @@ import os
 from PyQt5.QtWidgets import QMessageBox
 
 parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+dir_path = os.path.dirname(os.path.realpath(__file__)) 
 sys.path.append(parent_dir)
 from Scheduling.model import schedule
 
@@ -15,7 +16,7 @@ priority=[]
 class AddTaskDialog(QtWidgets.QDialog):
     def __init__(self):
         super(AddTaskDialog, self).__init__()
-        uic.loadUi('./taskForm.ui', self)
+        uic.loadUi(os.path.join(dir_path, 'taskForm.ui'), self)
         self.button.setStyleSheet("background-color: #8c4669; color: white;")
         self.button.clicked.connect(self.accept)
         self.comboBox.addItems([task for task in tasks])
@@ -30,7 +31,7 @@ class AddTaskDialog(QtWidgets.QDialog):
 class AddPriorityDialog(QtWidgets.QDialog):
     def __init__(self):
         super(AddPriorityDialog, self).__init__()
-        uic.loadUi('./priorityForm.ui', self)
+        uic.loadUi(os.path.join(dir_path, 'priorityForm.ui'), self)
         self.button.setStyleSheet("background-color: #8c4669; color: white;")
         self.button.clicked.connect(self.accept)
         self.comboBox.addItems([task for task in tasks])
@@ -44,7 +45,7 @@ class AddPriorityDialog(QtWidgets.QDialog):
 class Window2(QtWidgets.QMainWindow):
     def __init__(self):
         super(Window2, self).__init__()
-        uic.loadUi('./window2.ui', self)
+        uic.loadUi(os.path.join(dir_path, 'window2.ui'), self)
         #set window title
         self.setWindowTitle("Scheduling")
         self.button2.clicked.connect(self.getResourses)
@@ -129,7 +130,6 @@ class Window2(QtWidgets.QMainWindow):
                 delete_button.clicked.connect(lambda _, row=row_position: self.delete_row2(row, task1, task2))
                 self.table2.setCellWidget(row_position, 2, delete_button)
                 priority.append((tasks.index(task1), tasks.index(task2)))
-                print(priority)
 
     def getResourses(self):
         res_num = self.text2.toPlainText()
@@ -168,17 +168,17 @@ class Window2(QtWidgets.QMainWindow):
                 delete_button.clicked.connect(lambda _, row=row_position: self.delete_row(row, task, resource))
                 self.table.setCellWidget(row_position, 2, delete_button)
                 tasks_resources[tasks.index(task)].append(resources.index(resource))
-                print(tasks_resources)
+
 
     def delete_row(self, row, task, resource):
         self.table.removeRow(row)
         tasks_resources[tasks.index(task)].remove(resources.index(resource))
-        print(tasks_resources)
+
 
     def delete_row2(self, row, task1, task2):
         self.table2.removeRow(row)
         priority.remove((tasks.index(task1), tasks.index(task2)))
-        print(priority)
+
 
     def showInputWidgets(self):
         self.showWidgets()
@@ -187,7 +187,6 @@ class Window2(QtWidgets.QMainWindow):
         try:
             self.resTable.setRowCount(0)
             result = schedule(len(tasks), len(resources), tasks_resources, priority)["plan"]
-            print(result)
             if not result:
                 self.resLabel.show()
                 self.resLabel.setText("Pas de solution trouvée. Il existe une relation cyclique de priorité")

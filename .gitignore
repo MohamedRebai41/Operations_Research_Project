@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-__pycache__/
-=======
-#
 Interfaces/__pycache__
 Interfaces/.qtcreator
-
->>>>>>> abd2225250dbf8ef24d2a288874f7c236b39e82d
+Scheduling/__pycache__
+Nutrition/__pycache__

@@ -2,7 +2,7 @@ from PyQt5 import QtWidgets, uic
 import sys
 import os
 from PyQt5.QtWidgets import QMessageBox
-
+dir_path = os.path.dirname(os.path.realpath(__file__)) 
 parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(parent_dir)
 from Nutrition.model import optimize
@@ -10,7 +10,7 @@ from Nutrition.model import optimize
 class AddItemDialog(QtWidgets.QDialog):
     def __init__(self):
         super(AddItemDialog, self).__init__()
-        uic.loadUi('./itemForm.ui', self)  
+        uic.loadUi(os.path.join(dir_path, 'itemForm.ui'), self)  
         self.button.clicked.connect(self.accept)
         self.button.setStyleSheet("background-color: #8c4669; color: white;")
 
@@ -25,7 +25,7 @@ class AddItemDialog(QtWidgets.QDialog):
 class AddConstraintDialog(QtWidgets.QDialog):
     def __init__(self):
         super(AddConstraintDialog, self).__init__()
-        uic.loadUi('./constraintForm.ui', self)
+        uic.loadUi(os.path.join(dir_path, 'constraintForm.ui'), self)
         self.add0.clicked.connect(self.accept)
         self.add0.setStyleSheet("background-color: #8c4669; color: white;")
 
@@ -51,7 +51,7 @@ calcium=0
 class Window1(QtWidgets.QMainWindow):
     def __init__(self):
         super(Window1, self).__init__()
-        uic.loadUi('./window1.ui', self)
+        uic.loadUi(os.path.join(dir_path, 'window1.ui'), self)
         self.setWindowTitle("Nutrition")
         self.button1.clicked.connect(self.open_dialog)
         self.button1.setStyleSheet("background-color: #8c4669; color: white;")
@@ -170,7 +170,6 @@ class Window1(QtWidgets.QMainWindow):
                 delete_button.clicked.connect(lambda _, row=row_position: self.delete_row1(row))
                 self.table1.setCellWidget(row_position, 5, delete_button)  
                 items.append([item, proteine, calories, calcium, cout])
-                print(items)
 
             else :
                 self.show_error_message("Please fill all the fields")
@@ -196,7 +195,6 @@ class Window1(QtWidgets.QMainWindow):
                 delete_button.clicked.connect(lambda _, row=row_position: self.delete_row2(row))
                 self.table2.setCellWidget(row_position, 2, delete_button)
                 constraints.append([constraint, valeur])
-                print(constraints)
             
             else :
                 self.show_error_message("Please fill all the fields")
@@ -217,7 +215,6 @@ class Window1(QtWidgets.QMainWindow):
         constraints.pop(row)
 
     def optimise(self):
-        print("Optimising...")
         if items and constraints:
             if proteines and calories and calcium:
                 nb_items = len(items)
@@ -248,15 +245,12 @@ class Window1(QtWidgets.QMainWindow):
                     self.resLabel.hide()
                 # Clear existing table content
                     self.result.clearContents()
-                    print(x)
-
                     # Set row and column count
                     self.result.setRowCount(len(items))
 
                     for i in range(nb_items):
                         self.result.setItem(i, 0, QtWidgets.QTableWidgetItem(str(items[i][0])))
                         self.result.setItem(i, 1, QtWidgets.QTableWidgetItem(str(x[i])))
-                    print("Optimisation done")
                 else :
                     self.resLabel.show()
                     self.resLabel.setText("No solution found")
