@@ -63,6 +63,7 @@ class Window2(QtWidgets.QMainWindow):
         self.clearButton.clicked.connect(self.clearAll)
         self.table.setColumnCount(3)  
         self.resTable.hide()
+        self.resLabel.hide()
         self.hideWidgets()
 
     def hideWidgets(self):
@@ -112,6 +113,7 @@ class Window2(QtWidgets.QMainWindow):
         self.hideWidgets()
         self.clearButton.hide()
         self.resTable.hide()
+        self.resLabel.hide()
         
     def open_dialog_priority(self):
         dialog = AddPriorityDialog()
@@ -179,6 +181,11 @@ class Window2(QtWidgets.QMainWindow):
     def calculate(self):
         try:
             result = schedule(len(tasks), len(resources), tasks_resources, priority)["plan"]
+            if not result:
+                self.resLabel.show()
+                self.resLabel.setText("Pas de solution trouvée. Il existe une relation cyclique de priorité")
+                return
+
             print(result)
             self.resTable.show()
             self.resTable.setRowCount(len(tasks))

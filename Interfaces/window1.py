@@ -49,6 +49,7 @@ class Window1(QtWidgets.QMainWindow):
     def __init__(self):
         super(Window1, self).__init__()
         uic.loadUi('./window1.ui', self)
+        self.setWindowTitle("Nutrition")
         self.button1.clicked.connect(self.open_dialog)
         self.button1.setStyleSheet("background-color: #8c4669; color: white;")
         self.table1.setColumnCount(6)  
@@ -130,6 +131,7 @@ class Window1(QtWidgets.QMainWindow):
 
     def open_dialog(self):
         dialog = AddItemDialog()
+        dialog.setWindowTitle("Add Element")
         if dialog.exec_() == QtWidgets.QDialog.Accepted:
             item, proteine, calories, calcium, cout = dialog.get_data()
 
@@ -158,6 +160,7 @@ class Window1(QtWidgets.QMainWindow):
 
     def add_constraint(self):
         dialog = AddConstraintDialog()
+        dialog.setWindowTitle("Add Constraint")
         if dialog.exec_() == QtWidgets.QDialog.Accepted:
             constraint, valeur = dialog.get_data()
 
@@ -206,36 +209,36 @@ class Window1(QtWidgets.QMainWindow):
                 constraintsSup = []
                 self.result.show()
 
-                #     for i in range(len(constraints)):
-                #         temp = [0]*nb_items
-                #         for j in range(nb_items):
-                #             if constraints[i][0] == names[j]:
-                #                 temp[j] = 1
-                #                 break
-                #         temp.append(int(constraints[i][1]))
-                #         constraintsSup.append(temp)
-                #     const = [proteines, calories, calcium]
-                #     for i in range(3):
-                #         temp = []
-                #         for j in range(nb_items):
-                #             temp.append(items[j][i+1])
-                #         temp.append(int(const[i]))
-                #         constraintsInf.append(temp)
-                #     # call the optimization function to get the result 
-                #     x=optimize(nb_items, names, cout, constraintsInf, constraintsSup)
-                #     # Clear existing table content
-                #     self.result.clearContents()
-                #     print(x)
+                for i in range(len(constraints)):
+                    temp = [0]*nb_items
+                    for j in range(nb_items):
+                        if constraints[i][0] == names[j]:
+                            temp[j] = 1
+                            break
+                    temp.append(int(constraints[i][1]))
+                    constraintsSup.append(temp)
+                const = [proteines, calories, calcium]
+                for i in range(3):
+                    temp = []
+                    for j in range(nb_items):
+                        temp.append(items[j][i+1])
+                    temp.append(int(const[i]))
+                    constraintsInf.append(temp)
+                # call the optimization function to get the result 
+                x=optimize(nb_items, names, cout, constraintsInf, constraintsSup)
+                # Clear existing table content
+                self.result.clearContents()
+                print(x)
 
-                #     # # Set row and column count
-                # self.result.setRowCount(len(items))
+                # Set row and column count
+                self.result.setRowCount(len(items))
 
-                # for i in range(nb_items):
-                #     self.result.setItem(i, 0, QtWidgets.QTableWidgetItem(str(items[i][0])))
-                #     self.result.setItem(i, 1, QtWidgets.QTableWidgetItem(str(x[i])))
-                # print("Optimisation done")
+                for i in range(nb_items):
+                    self.result.setItem(i, 0, QtWidgets.QTableWidgetItem(str(items[i][0])))
+                    self.result.setItem(i, 1, QtWidgets.QTableWidgetItem(str(x[i])))
+                print("Optimisation done")
             else:
-                self.show_error_message("You need to add the basic constraints")
+                self.show_error_message("You need to add the basic constraints first")
                 return
 
     def show_error_message(self,message):
