@@ -8,11 +8,10 @@ from test_service import nx_generate_testcases
 from tqdm import tqdm
 
 
-def benchmark(schedule_,graph_type, nb_testcases, threshhold,priority=False):
+def benchmark(schedule_,graph_type, nb_testcases, threshhold,priority=False,step=1):
     results = []
-    n=2
+    n=3
     while True:
-        n+=1
         print(f"[N={n}]")
         current_results = []
         testcases = nx_generate_testcases(n,nb_testcases,graph_type,priority)
@@ -27,7 +26,8 @@ def benchmark(schedule_,graph_type, nb_testcases, threshhold,priority=False):
         results.append(mean)
         if(mean > threshhold):
             break
-    return results
+        n+=step
+    return results,n
 
 
 def plot_benchmarks(nv_benchmark, md_benchmark):
@@ -42,12 +42,25 @@ def plot_benchmarks(nv_benchmark, md_benchmark):
     plt.show()  
 
 
+def plot_benchmark(benchmark, n_values):
+    plt.figure(figsize=(10, 6))    
+    plt.plot(n_values, benchmark , marker='o', linestyle='-') 
+    plt.title('')
+    plt.xlabel('Size of Input (n)') 
+    plt.ylabel('Average Runtime (seconds)') 
+    plt.grid(True)  
+    plt.show()  
+
+
 def compare(graph_type="normal",nb_testcases=20,threshold=5,priority='False'):
-    nv_benchmarks= benchmark(nv.schedule_,graph_type,nb_testcases,threshold,priority)
-    md_benchmarks = benchmark(md.schedule_,graph_type,nb_testcases,threshold,priority)
+    nv_benchmarks= benchmark(nv.schedule_,graph_type,nb_testcases,threshold,priority)[0]
+    md_benchmarks = benchmark(md.schedule_,graph_type,nb_testcases,threshold,priority)[0]
     plot_benchmarks(nv_benchmarks,md_benchmarks)
 
 
+results,n_max = benchmark(md.schedule_,'dense',20,15,False,1)
+
+plot_benchmark(results,list(range(3,n_max+1,1)))
 
 
 

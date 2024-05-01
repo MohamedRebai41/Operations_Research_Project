@@ -74,7 +74,7 @@ def schedule_(n,edge_list,priority_edges=[]):
         m.addConstr(w[c-1]>=w[c])
     #Topological sort constraints
     for i,j in priority_edges:
-        for c in range(n-1):
+        for c in range(n):
             m.addConstr(sum(x[i,k] for k in range(c)) >= sum(x[j,k] for k in range(c)))
     for i,j in priority_edges:
         for c in range(n):
@@ -101,7 +101,7 @@ def format_results(model,n):
     }
 
 def get_session_plan(data):
-    plan = [[] for _ in len(data["nb_colors"])]
+    plan = [[] for _ in range(data["nb_colors"])]
     for i in range(len(data["assignment"])):
         plan[data["assignment"][i]].append(i)
     return {

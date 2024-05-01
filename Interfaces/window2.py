@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QMessageBox
 
 parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(parent_dir)
-# from Scheduling.model import schedule
+from Scheduling.model import schedule
 
 tasks = []
 resources = []
@@ -90,10 +90,10 @@ class Window2(QtWidgets.QMainWindow):
         self.calc.show()
         self.clearButton.show()
 
-    def clear(self):
+    def clear(self,n):
         self.table.setRowCount(0)
         tasks_resources.clear()
-        for i in range(len(tasks)):
+        for i in range(n):
             tasks_resources.append([])
 
     def clear2(self):
@@ -138,7 +138,7 @@ class Window2(QtWidgets.QMainWindow):
             if not res_num.isdigit() or not task_num.isdigit():
                 self.show_error_message("Please enter a valid number")
                 return
-            self.clear()
+            self.clear(int(task_num))
             self.clear2()
             resources.clear()
             for i in range(int(res_num)):
@@ -146,7 +146,6 @@ class Window2(QtWidgets.QMainWindow):
             tasks.clear()
             for i in range(int(task_num)):
                 tasks.append('Task ' + str(i))
-                tasks_resources.append([])
             self.showWidgets()
 
     def open_dialog(self):
@@ -184,6 +183,7 @@ class Window2(QtWidgets.QMainWindow):
             if not result:
                 self.resLabel.show()
                 self.resLabel.setText("Pas de solution trouvée. Il existe une relation cyclique de priorité")
+                self.resLabel.adjustSize()
                 return
 
             print(result)
