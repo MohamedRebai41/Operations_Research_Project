@@ -115,7 +115,7 @@ class Window2(QtWidgets.QMainWindow):
         dialog.setWindowTitle("Priority")
         if dialog.exec_() == QtWidgets.QDialog.Accepted:
             task1, task2 = dialog.getPriority()
-            if task1 and task2:
+            if task1 and task2 and (tasks.index(task1), tasks.index(task2)) not in priority and task1 != task2:
                 row_position = self.table2.rowCount()
                 self.table2.insertRow(row_position)
                 self.table2.setItem(row_position, 0, QtWidgets.QTableWidgetItem(task1))
@@ -147,7 +147,7 @@ class Window2(QtWidgets.QMainWindow):
         dialog.setWindowTitle("Tasks and Resources")
         if dialog.exec_() == QtWidgets.QDialog.Accepted:
             task, resource = dialog.getTasks()
-            if task and resource:
+            if task and resource and resources.index(resource) not in tasks_resources[tasks.index(task)]:
                 row_position = self.table.rowCount()
                 self.table.insertRow(row_position)
                 self.table.setItem(row_position, 0, QtWidgets.QTableWidgetItem(task))
@@ -172,19 +172,20 @@ class Window2(QtWidgets.QMainWindow):
         self.showWidgets()
 
     def calculate(self):
-        try:
-            result = schedule(len(tasks), len(resources), tasks_resources, priority)["plan"]
-            print(result)
-            self.resTable.show()
-            self.resTable.setRowCount(len(tasks))
-            for i in range(len(result)):
-                resource_text = ', '.join([str(x) for x in result[i]])
-                self.resTable.setItem(i, 0, QtWidgets.QTableWidgetItem("Session " + str(i)))
-                self.resTable.setItem(i, 1, QtWidgets.QTableWidgetItem(resource_text))
-            self.resTable.resizeColumnsToContents()
-        except Exception as e:
-            print(e)
-            self.show_error_message(str(e))         
+        # try:
+        #     result = schedule(len(tasks), len(resources), tasks_resources, priority)["plan"]
+        #     print(result)
+        #     self.resTable.show()
+        #     self.resTable.setRowCount(len(tasks))
+        #     for i in range(len(result)):
+        #         resource_text = ', '.join([str(x) for x in result[i]])
+        #         self.resTable.setItem(i, 0, QtWidgets.QTableWidgetItem("Session " + str(i)))
+        #         self.resTable.setItem(i, 1, QtWidgets.QTableWidgetItem(resource_text))
+        #     self.resTable.resizeColumnsToContents()
+        # except Exception as e:
+        #     print(e)
+        #     self.show_error_message(str(e))    
+        print("Calculating...")     
         
 
     def show_error_message(self,message):
