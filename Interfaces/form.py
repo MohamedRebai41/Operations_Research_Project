@@ -1,10 +1,5 @@
 import sys
 from PyQt5 import QtWidgets, uic
-import sys
-import os
-
-parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.append(parent_dir)
 from window1 import Window1
 from window2 import Window2
 
