@@ -13,7 +13,7 @@ def schedule(nb_tasks,nb_resources,tasks,priorities):
 
 
 def build_graph(tasks):
-    resources=len(tasks)*[[]]
+    resources=[[] for _ in tasks]
     for i in range(len(tasks)):
         for res in tasks[i]:
             resources[res].append(i)
@@ -111,4 +111,3 @@ def get_session_plan(data):
     return {
         'plan': plan
     }
-
