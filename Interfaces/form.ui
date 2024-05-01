@@ -228,7 +228,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Melek Bensnoussi</string>
+     <string>Malek Bensnoussi</string>
     </property>
    </widget>
    <widget class="QLabel" name="label4">
