@@ -101,6 +101,10 @@ def format_results(model,n):
     }
 
 def get_session_plan(data):
+    if(data == False):
+        return {
+            'plan': False
+        }
     plan = [[] for _ in range(data["nb_colors"])]
     for i in range(len(data["assignment"])):
         plan[data["assignment"][i]].append(i)
