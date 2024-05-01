@@ -92,6 +92,8 @@ class Window2(QtWidgets.QMainWindow):
     def clear(self):
         self.table.setRowCount(0)
         tasks_resources.clear()
+        for i in range(len(tasks)):
+            tasks_resources.append([])
 
     def clear2(self):
         self.table2.setRowCount(0)
@@ -109,6 +111,7 @@ class Window2(QtWidgets.QMainWindow):
         self.text2.clear()
         self.hideWidgets()
         self.clearButton.hide()
+        self.resTable.hide()
         
     def open_dialog_priority(self):
         dialog = AddPriorityDialog()
@@ -133,6 +136,8 @@ class Window2(QtWidgets.QMainWindow):
             if not res_num.isdigit() or not task_num.isdigit():
                 self.show_error_message("Please enter a valid number")
                 return
+            self.clear()
+            self.clear2()
             resources.clear()
             for i in range(int(res_num)):
                 resources.append('Resource ' + str(i))
@@ -172,20 +177,19 @@ class Window2(QtWidgets.QMainWindow):
         self.showWidgets()
 
     def calculate(self):
-        # try:
-        #     result = schedule(len(tasks), len(resources), tasks_resources, priority)["plan"]
-        #     print(result)
-        #     self.resTable.show()
-        #     self.resTable.setRowCount(len(tasks))
-        #     for i in range(len(result)):
-        #         resource_text = ', '.join([str(x) for x in result[i]])
-        #         self.resTable.setItem(i, 0, QtWidgets.QTableWidgetItem("Session " + str(i)))
-        #         self.resTable.setItem(i, 1, QtWidgets.QTableWidgetItem(resource_text))
-        #     self.resTable.resizeColumnsToContents()
-        # except Exception as e:
-        #     print(e)
-        #     self.show_error_message(str(e))    
-        print("Calculating...")     
+        try:
+            result = schedule(len(tasks), len(resources), tasks_resources, priority)["plan"]
+            print(result)
+            self.resTable.show()
+            self.resTable.setRowCount(len(tasks))
+            for i in range(len(result)):
+                resource_text = ', '.join([str(x) for x in result[i]])
+                self.resTable.setItem(i, 0, QtWidgets.QTableWidgetItem("Session " + str(i)))
+                self.resTable.setItem(i, 1, QtWidgets.QTableWidgetItem(resource_text))
+            self.resTable.resizeColumnsToContents()
+        except Exception as e:
+            print(e)
+            self.show_error_message(str(e))    
         
 
     def show_error_message(self,message):
