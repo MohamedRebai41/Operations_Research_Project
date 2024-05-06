@@ -176,12 +176,19 @@ class Window2(QtWidgets.QMainWindow):
     def showInputWidgets(self):
         self.showWidgets()
 
-    def calculate(self):
+    # def calculate(self):
         # try:
+        #     self.resTable.setRowCount(0)
         #     result = schedule(len(tasks), len(resources), tasks_resources, priority)["plan"]
-        #     print(result)
+        #     if not result:
+        #         self.resLabel.show()
+        #         self.resLabel.setText("Pas de solution trouvée. Il existe une relation cyclique de priorité")
+        #         self.resLabel.adjustSize()
+        #         self.resTable.hide()
+        #         return
+        #     self.resLabel.hide()
         #     self.resTable.show()
-        #     self.resTable.setRowCount(len(tasks))
+        #     self.resTable.setRowCount(len(result))
         #     for i in range(len(result)):
         #         resource_text = ', '.join([str(x) for x in result[i]])
         #         self.resTable.setItem(i, 0, QtWidgets.QTableWidgetItem("Session " + str(i)))
@@ -189,8 +196,7 @@ class Window2(QtWidgets.QMainWindow):
         #     self.resTable.resizeColumnsToContents()
         # except Exception as e:
         #     print(e)
-        #     self.show_error_message(str(e))    
-        print("Calculating...")     
+        #     self.show_error_message(str(e))  
         
 
     def show_error_message(self,message):
