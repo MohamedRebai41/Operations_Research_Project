@@ -2,35 +2,71 @@ from PyQt5 import QtWidgets, uic
 import sys
 import os
 from PyQt5.QtWidgets import QMessageBox
-dir_path = os.path.dirname(os.path.realpath(__file__)) 
+
 parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(parent_dir)
-from Nutrition.model import optimize
 
+# from Nutrition.model import optimize
 class AddItemDialog(QtWidgets.QDialog):
     def __init__(self):
         super(AddItemDialog, self).__init__()
-        uic.loadUi(os.path.join(dir_path, 'itemForm.ui'), self)  
+        uic.loadUi('./itemForm.ui', self)  
+        # self.button.clicked.connect(self.accept)
+        # self.button.setStyleSheet("background-color: #035283; color: white;")
+        self.create_input_fields(numCont)
+
+    def create_input_fields(self, numCont):
+        # Create input field for element
+        self.element_input = QtWidgets.QLineEdit(self)
+        self.element_input.setObjectName('element')
+        self.element_input.setPlaceholderText("Element")
+        self.element_input.setGeometry(30, 30, 100, 30)
+
+        # Create input fields for cont
+        self.cont_inputs = []
+        for i in range(numCont):
+            input_field = QtWidgets.QTextEdit(self)
+            input_field.setObjectName(contraintes[i])
+            input_field.setPlaceholderText(contraintes[i])
+            input_field.setGeometry(30 + (i+1)*110, 30 , 100, 30)
+            self.cont_inputs.append(input_field)
+
+        # Create input field for cout
+        self.cout_input = QtWidgets.QLineEdit(self)
+        self.cout_input.setObjectName('cout')
+        self.cout_input.setPlaceholderText("Cout")
+        self.cout_input.setGeometry(30 + (numCont+1)*110, 30 , 100, 30)
+
+        #add button
+        self.button = QtWidgets.QPushButton(self)
+        self.button.setObjectName('button')
+        self.button.setText('Ajouter')
+        self.button.setGeometry(40 + (numCont+2)*110, 30, 100, 30)
+        self.button.setStyleSheet("background-color: #035283; color: white;")
         self.button.clicked.connect(self.accept)
-        self.button.setStyleSheet("background-color: #8c4669; color: white;")
+
+        #adjust window size
+        self.setFixedSize(200 + (numCont+2)*110, 100)
+
+    
 
     def get_data(self):
-        item = self.text1.toPlainText()
-        proteine = self.text2.toPlainText()
-        calories = self.text3.toPlainText()
-        calcium = self.text4.toPlainText()
-        cout = self.text5_1.toPlainText()
-        return item, proteine, calories, calcium, cout
+        element = self.element_input.text()
+        cont = [input_field.toPlainText() for input_field in self.cont_inputs]
+        cout = self.cout_input.text()
+        return element, cont, cout
 
-class AddConstraintDialog(QtWidgets.QDialog):
-    def __init__(self):
-        super(AddConstraintDialog, self).__init__()
-        uic.loadUi(os.path.join(dir_path, 'constraintForm.ui'), self)
+class AddElementContDialog(QtWidgets.QDialog):
+    def __init__(self,str):
+        super(AddElementContDialog, self).__init__()
+        uic.loadUi('./constraintForm.ui', self)
         self.add0.clicked.connect(self.accept)
-        self.add0.setStyleSheet("background-color: #8c4669; color: white;")
-
+        self.add0.setStyleSheet("background-color: #035283; color: white;")
+        if (str=='element'):
         #add all the items to the combobox from the list of items
-        self.comboBox.addItems([item[0] for item in items])
+            self.comboBox.addItems([element[0] for element in elements])
+        else: 
+            self.comboBox.addItems(contraintes)
 
     def get_data(self):
         constraint = self.comboBox.currentText()
@@ -38,227 +74,256 @@ class AddConstraintDialog(QtWidgets.QDialog):
         if constraint and valeur:
             return constraint, valeur
         return None, None
-
-items=[]
-proteines=0
-calories=0
-lipides=0
-constraints=[]
-proteines=0
-calories=0
-calcium=0
+#[apple, 2, 3, 4, 5]
+elements=[]
+#(proteines, 2)
+objectifs=[]
+#proteines,calsium, calories
+contraintes=[]
+#(apple, 2)
+elementsCont=[]
+numCont=0
 
 class Window1(QtWidgets.QMainWindow):
     def __init__(self):
         super(Window1, self).__init__()
-        uic.loadUi(os.path.join(dir_path, 'window1.ui'), self)
+        uic.loadUi('./window1.ui', self)
         self.setWindowTitle("Nutrition")
-        self.button1.clicked.connect(self.open_dialog)
-        self.button1.setStyleSheet("background-color: #8c4669; color: white;")
-        self.table1.setColumnCount(6)  
-        self.table2.setColumnCount(3)
-        self.add.clicked.connect(self.add_constraint)
-        self.add.setStyleSheet("background-color: #8c4669; color: white;")
-        self.opt.setStyleSheet("background-color: #8c4669; color: white;")
-        self.opt.clicked.connect(self.optimise)
-        self.add1.setStyleSheet("background-color: #8c4669; color: white;")
-        self.add1.clicked.connect(self.getProteines)
-        self.add2.setStyleSheet("background-color: #8c4669; color: white;")
-        self.add2.clicked.connect(self.getCalories)
-        self.add3.setStyleSheet("background-color: #8c4669; color: white;")
-        self.add3.clicked.connect(self.getCalcium)
-        self.clearButton.setStyleSheet("background-color: #8c4669; color: white;")
-        self.clearButton.clicked.connect(self.clearAll)
-        self.result.hide()
+        self.add.clicked.connect(self.open_dialog)
+        self.add.setStyleSheet("background-color: #035283; color: white;")
+        self.addEl.clicked.connect(self.addElCont)
+        self.addEl.setStyleSheet("background-color: #035283; color: white;")
+        self.opt.setStyleSheet("background-color: #035283; color: white;")
+        # self.opt.clicked.connect(self.optimise)
+        self.addNum.setStyleSheet("background-color: #035283; color: white;")
+        self.addNum.clicked.connect(self.numContraintes)
+        self.ajouterCont.setStyleSheet("background-color: #035283; color: white;")
+        self.ajouterCont.clicked.connect(self.addContraintes)
+        self.addObj.clicked.connect(self.addObjCont)
+        self.addObj.setStyleSheet("background-color: #035283; color: white;")
+        self.hideElements()
+
+    def hideElements(self):
+        self.add.hide()
+        self.table1.hide()
+        self.label_4.hide()
+        self.ajouterCont.hide()
+        self.cont.hide()
+        self.tableCont.hide()
+        self.label_2.hide()
+        self.label_7.hide()
+        self.tableObj.hide()
+        self.addObj.hide()
+        self.label_8.hide()
+        self.tableEl.hide()
+        self.addEl.hide()
+        self.opt.hide()
         self.resLabel.hide()
-
-    def getProteines(self):
-        for i in range(len(constraints)):
-            if constraints[i][0] == "proteines":
-                return
-        global proteines 
-        proteines=self.cont1.toPlainText()
-        if proteines:
-            if proteines.isdigit():
-                constraints.append(["proteines", proteines])
-                row_position = self.table2.rowCount()
-                self.table2.insertRow(row_position)
-                self.table2.setItem(row_position, 0, QtWidgets.QTableWidgetItem("proteines"))
-                self.table2.setItem(row_position, 1, QtWidgets.QTableWidgetItem(proteines))
-                delete_button = QtWidgets.QPushButton("Delete")
-                delete_button.clicked.connect(lambda _, row=row_position: self.delete_row2(row))
-                self.table2.setCellWidget(row_position, 2, delete_button)
-            else :
-                self.show_error_message("Please enter a valid input")
-                return
-
-    def getCalories(self):
-        for i in range(len(constraints)):
-            if constraints[i][0] == "calories":
-                return
-        global calories
-        calories=self.cont2.toPlainText()
-        if calories :
-            if calories.isdigit():
-                constraints.append(["calories", calories])
-                row_position = self.table2.rowCount()
-                self.table2.insertRow(row_position)
-                self.table2.setItem(row_position, 0, QtWidgets.QTableWidgetItem("calories"))
-                self.table2.setItem(row_position, 1, QtWidgets.QTableWidgetItem(calories))
-                delete_button = QtWidgets.QPushButton("Delete")
-                delete_button.clicked.connect(lambda _, row=row_position: self.delete_row2(row))
-                self.table2.setCellWidget(row_position, 2, delete_button)
-            else :
-                self.show_error_message("Please enter a valid input")
-                return
-
-        
-    def getCalcium(self):
-        for i in range(len(constraints)):
-            if constraints[i][0] == "calcium":
-                return
-        global calcium
-        calcium=self.cont3.toPlainText()
-        if calcium:
-            if calcium.isdigit():
-                constraints.append(["calcium", calcium])
-                row_position = self.table2.rowCount()
-                self.table2.insertRow(row_position)
-                self.table2.setItem(row_position, 0, QtWidgets.QTableWidgetItem("calcium"))
-                self.table2.setItem(row_position, 1, QtWidgets.QTableWidgetItem(calcium))
-                delete_button = QtWidgets.QPushButton("Delete")
-                delete_button.clicked.connect(lambda _, row=row_position: self.delete_row2(row))
-                self.table2.setCellWidget(row_position, 2, delete_button)
-            else :
-                self.show_error_message("Please enter a valid input")
-                return
-            
-    
-    def clearAll(self):
-        self.table1.setRowCount(0)
-        self.table2.setRowCount(0)
-        self.result.setRowCount(0)
-        items.clear()
-        constraints.clear()
-        self.cont1.clear()
-        self.cont2.clear()
-        self.cont3.clear()
         self.result.hide()
-        self.result.clearContents()
+
+
+    def numContraintes(self):
+        num=self.numCont.toPlainText()
+        if num:
+            if num.isdigit():
+                global numCont
+                numCont=int(num)
+                self.show0()
+            else :
+                self.show_error_message("Ajouter un nombre valide")
+                return
+        self.numCont.clear()
+        
+    def addContraintes(self):
+        if numCont!=0 and numCont>len(contraintes):
+            cont=self.cont.toPlainText()
+            if cont:
+                if cont.isalpha():
+                    row_position = self.tableCont.rowCount()
+                    self.tableCont.insertRow(row_position)
+                    self.tableCont.setItem(row_position, 0, QtWidgets.QTableWidgetItem(cont))
+                    delete_button = QtWidgets.QPushButton("Supp")
+                    delete_button.clicked.connect(lambda _, row=row_position: self.deleteCont(row))
+                    self.tableCont.setCellWidget(row_position, 1, delete_button)
+                    contraintes.append(cont)
+                else :
+                    self.show_error_message("Ajouter une contrainte valide")
+                    return
+            
+        if numCont==0:
+            self.show_error_message("Ajouter le nombre de contraintes")
+            return
+        if len(contraintes)==numCont:
+            self.show1()
+            return
+        self.cont.clear()
+        
+    def show0(self):
+        self.label_4.show()
+        self.cont.show()
+        self.ajouterCont.show()
+        self.tableCont.show()
+
+    def show1(self):
+        self.table1.setColumnCount(numCont+3)
+        self.table1.setHorizontalHeaderLabels(["Element"]+contraintes+["Cout", "Delete"])
+        self.table1.show()
+        self.add.show()
+        self.label_2.show()
+        self.label_7.show()
+        self.tableObj.show()
+        self.addObj.show()
+        self.label_8.show()
+        self.tableEl.show()
+        self.addEl.show()
+        self.opt.show()
+        self.resLabel.show()
+        self.result.show()
+
+    def deleteCont(self, row):
+        self.tableCont.removeRow(row)
+        contraintes.pop(row)
+        self.tableCont.setRowCount(self.tableCont.rowCount()-1)
+
 
 
     def open_dialog(self):
         dialog = AddItemDialog()
-        dialog.setWindowTitle("Add Element")
+        dialog.setWindowTitle("Ajouter un element")
         if dialog.exec_() == QtWidgets.QDialog.Accepted:
-            item, proteine, calories, calcium, cout = dialog.get_data()
-
-            if item and proteine and calories and calcium and cout:
-                if not proteine.isdigit() or not calories.isdigit() or not calcium.isdigit() or not cout.isdigit() or not item.isalpha():
-                    self.show_error_message("Please enter a valid input")
-                    return
+            item, cont, cout = dialog.get_data()
+            if item and cont and cout and len(cont)==numCont:
                 row_position = self.table1.rowCount()
                 self.table1.insertRow(row_position)
-
                 self.table1.setItem(row_position, 0, QtWidgets.QTableWidgetItem(item))
-                self.table1.setItem(row_position, 1, QtWidgets.QTableWidgetItem(proteine))
-                self.table1.setItem(row_position, 2, QtWidgets.QTableWidgetItem(calories))
-                self.table1.setItem(row_position, 3, QtWidgets.QTableWidgetItem(calcium))
-                self.table1.setItem(row_position, 4, QtWidgets.QTableWidgetItem(cout))
-
-                delete_button = QtWidgets.QPushButton("Delete")
+                for i in range(numCont):
+                    self.table1.setItem(row_position, i+1, QtWidgets.QTableWidgetItem(cont[i]))
+                self.table1.setItem(row_position, numCont+1, QtWidgets.QTableWidgetItem(cout))
+                delete_button = QtWidgets.QPushButton("Supp")
                 delete_button.clicked.connect(lambda _, row=row_position: self.delete_row1(row))
-                self.table1.setCellWidget(row_position, 5, delete_button)  
-                items.append([item, proteine, calories, calcium, cout])
+                self.table1.setCellWidget(row_position, numCont+2, delete_button)
+                elements.append([item]+cont+[cout])
+                print(elements)
+            
 
             else :
-                self.show_error_message("Please fill all the fields")
+                self.show_error_message("Remplir tous les champs")
                 return
+            
+    def delete_row1(self, row):
+        #delete the the element from elementsCont
+        for i in range(len(elementsCont)):
+            if elementsCont[i][0] == elements[row][0]:
+                elementsCont.pop(i)
+                self.tableEl.removeRow(i)
+                break
+        self.table1.removeRow(row)
+        elements.pop(row)
 
-    def add_constraint(self):
-        dialog = AddConstraintDialog()
-        dialog.setWindowTitle("Add Constraint")
+    def addElCont(self):
+        dialog = AddElementContDialog('element')
+        dialog.setWindowTitle("Ajouter une contrainte sur un element")
         if dialog.exec_() == QtWidgets.QDialog.Accepted:
             constraint, valeur = dialog.get_data()
 
             if constraint and valeur:
                 if not valeur.isdigit():
-                    self.show_error_message("Please enter a valid input")
+                    self.show_error_message("Ajouter une valeur valide")
                     return
-                row_position = self.table2.rowCount()
-                self.table2.insertRow(row_position)
+                row_position = self.tableEl.rowCount()
+                self.tableEl.insertRow(row_position)
 
-                self.table2.setItem(row_position, 0, QtWidgets.QTableWidgetItem(constraint))
-                self.table2.setItem(row_position, 1, QtWidgets.QTableWidgetItem(valeur))
+                self.tableEl.setItem(row_position, 0, QtWidgets.QTableWidgetItem(constraint))
+                self.tableEl.setItem(row_position, 1, QtWidgets.QTableWidgetItem(valeur))
 
-                delete_button = QtWidgets.QPushButton("Delete")
-                delete_button.clicked.connect(lambda _, row=row_position: self.delete_row2(row))
-                self.table2.setCellWidget(row_position, 2, delete_button)
-                constraints.append([constraint, valeur])
+                delete_button = QtWidgets.QPushButton("Supp")
+                delete_button.clicked.connect(lambda _, row=row_position: self.deleteElCont(row,'element'))
+                self.tableEl.setCellWidget(row_position, 2, delete_button)
+                elementsCont.append([constraint, valeur])
+                print(elementsCont)
             
             else :
-                self.show_error_message("Please fill all the fields")
+                self.show_error_message("Veillez remplir tous les champs")
                 return
+            
+    def addObjCont(self):
+        dialog = AddElementContDialog('obj')
+        dialog.setWindowTitle("Ajouter une contrainte sur un objectif")
+        if dialog.exec_() == QtWidgets.QDialog.Accepted:
+            constraint, valeur = dialog.get_data()
 
-    def delete_row1(self, row):
-        #delete the constraints
-        for i in range(len(constraints)):
-            if constraints[i][0] == items[row][0]:
-                constraints.pop(i)
-                self.table2.removeRow(i)
-                break
-        self.table1.removeRow(row)
-        items.pop(row)
+            if constraint and valeur:
+                if not valeur.isdigit():
+                    self.show_error_message("Ajouter une valeur valide")
+                    return
+                row_position = self.tableObj.rowCount()
+                self.tableObj.insertRow(row_position)
+
+                self.tableObj.setItem(row_position, 0, QtWidgets.QTableWidgetItem(constraint))
+                self.tableObj.setItem(row_position, 1, QtWidgets.QTableWidgetItem(valeur))
+
+                delete_button = QtWidgets.QPushButton("Supp")
+                delete_button.clicked.connect(lambda _, row=row_position: self.deleteElCont(row,'obj'))
+                self.tableObj.setCellWidget(row_position, 2, delete_button)
+                objectifs.append([constraint, valeur])
+                print(objectifs)
+            else :
+                self.show_error_message("Veillez remplir tous les champs")
+                return
+            
+    def deleteElCont(self, row,str):
+        print(row)
+        if str=='element':
+            self.tableEl.removeRow(row)
+            elementsCont.pop(row)
+        else:
+            self.tableObj.removeRow(row)
+            objectifs.pop(row)
+        
     
-    def delete_row2(self, row):
-        self.table2.removeRow(row)
-        constraints.pop(row)
 
-    def optimise(self):
-        if items and constraints:
-            if proteines and calories and calcium:
-                nb_items = len(items)
-                names = [item[0] for item in items]
-                cout = [int(item[4]) for item in items]
-                constraintsInf= []
-                constraintsSup = []
+    # def optimise(self):
+        # print("Optimising...")
+        # if items and constraints:
+        #     if proteines and calories and calcium:
+        #         nb_items = len(items)
+        #         names = [item[0] for item in items]
+        #         cout = [int(item[4]) for item in items]
+        #         constraintsInf= []
+        #         constraintsSup = []
+        #         self.result.show()
 
-                for i in range(len(constraints)):
-                    temp = [0]*nb_items
-                    for j in range(nb_items):
-                        if constraints[i][0] == names[j]:
-                            temp[j] = 1
-                            break
-                    temp.append(int(constraints[i][1]))
-                    constraintsSup.append(temp)
-                const = [proteines, calories, calcium]
-                for i in range(3):
-                    temp = []
-                    for j in range(nb_items):
-                        temp.append(items[j][i+1])
-                    temp.append(int(const[i]))
-                    constraintsInf.append(temp)
-                # call the optimization function to get the result 
-                x=optimize(nb_items, names, cout, constraintsInf, constraintsSup)
-                if x:
-                    self.result.show()
-                    self.resLabel.hide()
-                # Clear existing table content
-                    self.result.clearContents()
-                    # Set row and column count
-                    self.result.setRowCount(len(items))
+                #     for i in range(len(constraints)):
+                #         temp = [0]*nb_items
+                #         for j in range(nb_items):
+                #             if constraints[i][0] == names[j]:
+                #                 temp[j] = 1
+                #                 break
+                #         temp.append(int(constraints[i][1]))
+                #         constraintsSup.append(temp)
+                #     const = [proteines, calories, calcium]
+                #     for i in range(3):
+                #         temp = []
+                #         for j in range(nb_items):
+                #             temp.append(items[j][i+1])
+                #         temp.append(int(const[i]))
+                #         constraintsInf.append(temp)
+                #     # call the optimization function to get the result 
+                #     x=optimize(nb_items, names, cout, constraintsInf, constraintsSup)
+                #     # Clear existing table content
+                #     self.result.clearContents()
+                #     print(x)
 
-                    for i in range(nb_items):
-                        self.result.setItem(i, 0, QtWidgets.QTableWidgetItem(str(items[i][0])))
-                        self.result.setItem(i, 1, QtWidgets.QTableWidgetItem(str(x[i])))
-                else :
-                    self.resLabel.show()
-                    self.resLabel.setText("No solution found")
-                    self.resLabel.adjustSize()
-                    self.result.hide()
-            else:
-                self.show_error_message("You need to add the basic constraints first")
-                return
+                #     # # Set row and column count
+                # self.result.setRowCount(len(items))
+
+                # for i in range(nb_items):
+                #     self.result.setItem(i, 0, QtWidgets.QTableWidgetItem(str(items[i][0])))
+                #     self.result.setItem(i, 1, QtWidgets.QTableWidgetItem(str(x[i])))
+                # print("Optimisation done")
+            # else:
+            #     self.show_error_message("You need to add the basic constraints")
+            #     return
 
     def show_error_message(self,message):
         msg = QMessageBox()

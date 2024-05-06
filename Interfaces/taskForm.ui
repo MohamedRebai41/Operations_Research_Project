@@ -10,6 +10,87 @@
     <height>125</height>
    </rect>
   </property>
+  <property name="palette">
+   <palette>
+    <active>
+     <colorrole role="WindowText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>3</red>
+        <green>82</green>
+        <blue>131</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Text">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>3</red>
+        <green>82</green>
+        <blue>131</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="ButtonText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>3</red>
+        <green>82</green>
+        <blue>131</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Highlight">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>3</red>
+        <green>82</green>
+        <blue>131</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </active>
+    <inactive>
+     <colorrole role="WindowText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>3</red>
+        <green>82</green>
+        <blue>131</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Text">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>3</red>
+        <green>82</green>
+        <blue>131</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="ButtonText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>3</red>
+        <green>82</green>
+        <blue>131</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Highlight">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>3</red>
+        <green>82</green>
+        <blue>131</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </inactive>
+    <disabled/>
+   </palette>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
@@ -23,7 +104,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Task</string>
+    <string>Tache</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
@@ -31,12 +112,12 @@
     <rect>
      <x>150</x>
      <y>30</y>
-     <width>63</width>
+     <width>91</width>
      <height>20</height>
     </rect>
    </property>
    <property name="text">
-    <string>Resourse</string>
+    <string>Ressource</string>
    </property>
   </widget>
   <widget class="QComboBox" name="comboBox">
@@ -59,7 +140,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Add</string>
+    <string>Ajouter</string>
    </property>
   </widget>
   <widget class="QComboBox" name="comboBox2">

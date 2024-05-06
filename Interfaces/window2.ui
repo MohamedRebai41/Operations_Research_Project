@@ -7,12 +7,21 @@
     <x>0</x>
     <y>0</y>
     <width>954</width>
-    <height>765</height>
+    <height>885</height>
    </rect>
   </property>
   <property name="palette">
    <palette>
     <active>
+     <colorrole role="WindowText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>3</red>
+        <green>82</green>
+        <blue>131</blue>
+       </color>
+      </brush>
+     </colorrole>
      <colorrole role="BrightText">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
@@ -25,14 +34,32 @@
      <colorrole role="ButtonText">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>140</red>
-        <green>70</green>
-        <blue>105</blue>
+        <red>3</red>
+        <green>82</green>
+        <blue>131</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Highlight">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>3</red>
+        <green>82</green>
+        <blue>131</blue>
        </color>
       </brush>
      </colorrole>
     </active>
     <inactive>
+     <colorrole role="WindowText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>3</red>
+        <green>82</green>
+        <blue>131</blue>
+       </color>
+      </brush>
+     </colorrole>
      <colorrole role="BrightText">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
@@ -45,9 +72,18 @@
      <colorrole role="ButtonText">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>140</red>
-        <green>70</green>
-        <blue>105</blue>
+        <red>3</red>
+        <green>82</green>
+        <blue>131</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Highlight">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>3</red>
+        <green>82</green>
+        <blue>131</blue>
        </color>
       </brush>
      </colorrole>
@@ -75,73 +111,7 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>130</y>
-     <width>181</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="palette">
-    <palette>
-     <active>
-      <colorrole role="WindowText">
-       <brush brushstyle="SolidPattern">
-        <color alpha="255">
-         <red>140</red>
-         <green>70</green>
-         <blue>105</blue>
-        </color>
-       </brush>
-      </colorrole>
-     </active>
-     <inactive>
-      <colorrole role="WindowText">
-       <brush brushstyle="SolidPattern">
-        <color alpha="255">
-         <red>140</red>
-         <green>70</green>
-         <blue>105</blue>
-        </color>
-       </brush>
-      </colorrole>
-     </inactive>
-     <disabled/>
-    </palette>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>12</pointsize>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>Number of tasks:</string>
-   </property>
-  </widget>
-  <widget class="QTextEdit" name="text1">
-   <property name="geometry">
-    <rect>
-     <x>260</x>
-     <y>130</y>
-     <width>81</width>
-     <height>31</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QTextEdit" name="text2">
-   <property name="geometry">
-    <rect>
-     <x>260</x>
-     <y>180</y>
-     <width>81</width>
-     <height>31</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>180</y>
+     <y>220</y>
      <width>221</width>
      <height>20</height>
     </rect>
@@ -152,9 +122,9 @@
       <colorrole role="WindowText">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>140</red>
-         <green>70</green>
-         <blue>105</blue>
+         <red>3</red>
+         <green>82</green>
+         <blue>131</blue>
         </color>
        </brush>
       </colorrole>
@@ -163,9 +133,9 @@
       <colorrole role="WindowText">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>140</red>
-         <green>70</green>
-         <blue>105</blue>
+         <red>3</red>
+         <green>82</green>
+         <blue>131</blue>
         </color>
        </brush>
       </colorrole>
@@ -180,31 +150,97 @@
     </font>
    </property>
    <property name="text">
-    <string>Number of resources:</string>
+    <string>Nombre de Taches:</string>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="text1">
+   <property name="geometry">
+    <rect>
+     <x>260</x>
+     <y>220</y>
+     <width>81</width>
+     <height>31</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="text2">
+   <property name="geometry">
+    <rect>
+     <x>260</x>
+     <y>270</y>
+     <width>81</width>
+     <height>31</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>270</y>
+     <width>231</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="palette">
+    <palette>
+     <active>
+      <colorrole role="WindowText">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>3</red>
+         <green>82</green>
+         <blue>131</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </active>
+     <inactive>
+      <colorrole role="WindowText">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>3</red>
+         <green>82</green>
+         <blue>131</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </inactive>
+     <disabled/>
+    </palette>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Nombre de Ressources</string>
    </property>
   </widget>
   <widget class="QTableWidget" name="table">
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>290</y>
+     <y>380</y>
      <width>381</width>
      <height>221</height>
     </rect>
    </property>
    <column>
     <property name="text">
-     <string>Task</string>
+     <string>Tache</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>Resource</string>
+     <string>Ressource</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>Delete</string>
+     <string>Supprimer</string>
     </property>
    </column>
   </widget>
@@ -212,20 +248,20 @@
    <property name="geometry">
     <rect>
      <x>360</x>
-     <y>150</y>
+     <y>240</y>
      <width>83</width>
      <height>29</height>
     </rect>
    </property>
    <property name="text">
-    <string>Add</string>
+    <string>Ajouter</string>
    </property>
   </widget>
   <widget class="QLabel" name="label3">
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>250</y>
+     <y>340</y>
      <width>141</width>
      <height>20</height>
     </rect>
@@ -236,9 +272,9 @@
       <colorrole role="WindowText">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>140</red>
-         <green>70</green>
-         <blue>105</blue>
+         <red>3</red>
+         <green>82</green>
+         <blue>131</blue>
         </color>
        </brush>
       </colorrole>
@@ -247,9 +283,9 @@
       <colorrole role="WindowText">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>140</red>
-         <green>70</green>
-         <blue>105</blue>
+         <red>3</red>
+         <green>82</green>
+         <blue>131</blue>
         </color>
        </brush>
       </colorrole>
@@ -264,66 +300,66 @@
     </font>
    </property>
    <property name="text">
-    <string>Tasks:</string>
+    <string>Taches:</string>
    </property>
   </widget>
   <widget class="QPushButton" name="button3">
    <property name="geometry">
     <rect>
      <x>240</x>
-     <y>250</y>
+     <y>340</y>
      <width>83</width>
      <height>29</height>
     </rect>
    </property>
    <property name="text">
-    <string>Add</string>
+    <string>Ajouter</string>
    </property>
   </widget>
   <widget class="QPushButton" name="button4">
    <property name="geometry">
     <rect>
      <x>340</x>
-     <y>250</y>
+     <y>340</y>
      <width>83</width>
      <height>29</height>
     </rect>
    </property>
    <property name="text">
-    <string>Clear</string>
+    <string>Effacer</string>
    </property>
   </widget>
   <widget class="QPushButton" name="button5">
    <property name="geometry">
     <rect>
      <x>690</x>
-     <y>250</y>
+     <y>340</y>
      <width>83</width>
      <height>29</height>
     </rect>
    </property>
    <property name="text">
-    <string>Add</string>
+    <string>Ajouter</string>
    </property>
   </widget>
   <widget class="QPushButton" name="button6">
    <property name="geometry">
     <rect>
      <x>790</x>
-     <y>250</y>
+     <y>340</y>
      <width>83</width>
      <height>29</height>
     </rect>
    </property>
    <property name="text">
-    <string>Clear</string>
+    <string>Effacer</string>
    </property>
   </widget>
   <widget class="QLabel" name="label1">
    <property name="geometry">
     <rect>
      <x>490</x>
-     <y>250</y>
+     <y>340</y>
      <width>81</width>
      <height>31</height>
     </rect>
@@ -334,9 +370,9 @@
       <colorrole role="WindowText">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>140</red>
-         <green>70</green>
-         <blue>105</blue>
+         <red>3</red>
+         <green>82</green>
+         <blue>131</blue>
         </color>
        </brush>
       </colorrole>
@@ -345,9 +381,9 @@
       <colorrole role="WindowText">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>140</red>
-         <green>70</green>
-         <blue>105</blue>
+         <red>3</red>
+         <green>82</green>
+         <blue>131</blue>
         </color>
        </brush>
       </colorrole>
@@ -362,31 +398,31 @@
     </font>
    </property>
    <property name="text">
-    <string>Priority:</string>
+    <string>Priorité:</string>
    </property>
   </widget>
   <widget class="QTableWidget" name="table2">
    <property name="geometry">
     <rect>
      <x>490</x>
-     <y>290</y>
+     <y>380</y>
      <width>381</width>
      <height>221</height>
     </rect>
    </property>
    <column>
     <property name="text">
-     <string>Task 1</string>
+     <string>Tache 1</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>Task 2</string>
+     <string>Tache 2</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>Delete</string>
+     <string>Supprimer</string>
     </property>
    </column>
   </widget>
@@ -394,7 +430,7 @@
    <property name="geometry">
     <rect>
      <x>70</x>
-     <y>570</y>
+     <y>660</y>
      <width>141</width>
      <height>101</height>
     </rect>
@@ -415,7 +451,7 @@
    <property name="geometry">
     <rect>
      <x>280</x>
-     <y>540</y>
+     <y>630</y>
      <width>291</width>
      <height>192</height>
     </rect>
@@ -427,7 +463,7 @@
    </column>
    <column>
     <property name="text">
-     <string>Tasks</string>
+     <string>Tache</string>
     </property>
    </column>
   </widget>
@@ -435,7 +471,7 @@
    <property name="geometry">
     <rect>
      <x>572</x>
-     <y>140</y>
+     <y>230</y>
      <width>151</width>
      <height>61</height>
     </rect>
@@ -446,15 +482,15 @@
     </font>
    </property>
    <property name="text">
-    <string>Clear All</string>
+    <string>Effacer</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>160</x>
+     <x>140</x>
      <y>30</y>
-     <width>721</width>
+     <width>631</width>
      <height>51</height>
     </rect>
    </property>
@@ -472,7 +508,7 @@
    <property name="geometry">
     <rect>
      <x>270</x>
-     <y>590</y>
+     <y>680</y>
      <width>441</width>
      <height>51</height>
     </rect>
@@ -484,6 +520,54 @@
    </property>
    <property name="text">
     <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>90</y>
+     <width>761</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="palette">
+    <palette>
+     <active>
+      <colorrole role="WindowText">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>0</red>
+         <green>0</green>
+         <blue>0</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </active>
+     <inactive>
+      <colorrole role="WindowText">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>0</red>
+         <green>0</green>
+         <blue>0</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </inactive>
+     <disabled/>
+    </palette>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Cette interface traite un problème d'optimisation PLNE pour planifier des tâches, qu'il s'agisse de tâches en usine (ressources : machines) ou de tâches en salle d'opération (ressources : chirurgiens, salles), en minimisant les sessions et en tenant compte des priorités, tout en empêchant les tâches partageant des ressources de se dérouler en parallèle.</string>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
    </property>
   </widget>
  </widget>

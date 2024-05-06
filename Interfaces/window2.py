@@ -4,9 +4,8 @@ import os
 from PyQt5.QtWidgets import QMessageBox
 
 parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-dir_path = os.path.dirname(os.path.realpath(__file__)) 
 sys.path.append(parent_dir)
-from Scheduling.model import schedule
+# from Scheduling.model import schedule
 
 tasks = []
 resources = []
@@ -16,8 +15,8 @@ priority=[]
 class AddTaskDialog(QtWidgets.QDialog):
     def __init__(self):
         super(AddTaskDialog, self).__init__()
-        uic.loadUi(os.path.join(dir_path, 'taskForm.ui'), self)
-        self.button.setStyleSheet("background-color: #8c4669; color: white;")
+        uic.loadUi('./taskForm.ui', self)
+        self.button.setStyleSheet("background-color: #035283; color: white;")
         self.button.clicked.connect(self.accept)
         self.comboBox.addItems([task for task in tasks])
         self.comboBox2.addItems([resource for resource in resources])
@@ -31,8 +30,8 @@ class AddTaskDialog(QtWidgets.QDialog):
 class AddPriorityDialog(QtWidgets.QDialog):
     def __init__(self):
         super(AddPriorityDialog, self).__init__()
-        uic.loadUi(os.path.join(dir_path, 'priorityForm.ui'), self)
-        self.button.setStyleSheet("background-color: #8c4669; color: white;")
+        uic.loadUi('./priorityForm.ui', self)
+        self.button.setStyleSheet("background-color: #035283; color: white;")
         self.button.clicked.connect(self.accept)
         self.comboBox.addItems([task for task in tasks])
         self.comboBox2.addItems([task for task in tasks])
@@ -45,26 +44,25 @@ class AddPriorityDialog(QtWidgets.QDialog):
 class Window2(QtWidgets.QMainWindow):
     def __init__(self):
         super(Window2, self).__init__()
-        uic.loadUi(os.path.join(dir_path, 'window2.ui'), self)
+        uic.loadUi('./window2.ui', self)
         #set window title
-        self.setWindowTitle("Scheduling")
+        self.setWindowTitle("Planification")
         self.button2.clicked.connect(self.getResourses)
-        self.button2.setStyleSheet("background-color: #8c4669; color: white;")
-        self.button3.setStyleSheet("background-color: #8c4669; color: white;")
+        self.button2.setStyleSheet("background-color: #035283; color: white;")
+        self.button3.setStyleSheet("background-color: #035283; color: white;")
         self.button3.clicked.connect(self.open_dialog)
-        self.button4.setStyleSheet("background-color: #8c4669; color: white;")
+        self.button4.setStyleSheet("background-color: #035283; color: white;")
         self.button4.clicked.connect(self.clear)
-        self.button5.setStyleSheet("background-color: #8c4669; color: white;")
+        self.button5.setStyleSheet("background-color: #035283; color: white;")
         self.button5.clicked.connect(self.open_dialog_priority)
-        self.button6.setStyleSheet("background-color: #8c4669; color: white;")
+        self.button6.setStyleSheet("background-color: #035283; color: white;")
         self.button6.clicked.connect(self.clear2)
-        self.calc.setStyleSheet("background-color: #8c4669; color: white;")
+        self.calc.setStyleSheet("background-color: #035283; color: white;")
         self.calc.clicked.connect(self.calculate)
-        self.clearButton.setStyleSheet("background-color: #8c4669; color: white;")
+        self.clearButton.setStyleSheet("background-color: #035283; color: white;")
         self.clearButton.clicked.connect(self.clearAll)
         self.table.setColumnCount(3)  
         self.resTable.hide()
-        self.resLabel.hide()
         self.hideWidgets()
 
     def hideWidgets(self):
@@ -91,10 +89,10 @@ class Window2(QtWidgets.QMainWindow):
         self.calc.show()
         self.clearButton.show()
 
-    def clear(self,n):
+    def clear(self):
         self.table.setRowCount(0)
         tasks_resources.clear()
-        for i in range(n):
+        for i in range(len(tasks)):
             tasks_resources.append([])
 
     def clear2(self):
@@ -114,11 +112,10 @@ class Window2(QtWidgets.QMainWindow):
         self.hideWidgets()
         self.clearButton.hide()
         self.resTable.hide()
-        self.resLabel.hide()
         
     def open_dialog_priority(self):
         dialog = AddPriorityDialog()
-        dialog.setWindowTitle("Priority")
+        dialog.setWindowTitle("Priorité")
         if dialog.exec_() == QtWidgets.QDialog.Accepted:
             task1, task2 = dialog.getPriority()
             if task1 and task2 and (tasks.index(task1), tasks.index(task2)) not in priority and task1 != task2:
@@ -126,37 +123,33 @@ class Window2(QtWidgets.QMainWindow):
                 self.table2.insertRow(row_position)
                 self.table2.setItem(row_position, 0, QtWidgets.QTableWidgetItem(task1))
                 self.table2.setItem(row_position, 1, QtWidgets.QTableWidgetItem(task2))
-                delete_button = QtWidgets.QPushButton("Delete")
+                delete_button = QtWidgets.QPushButton("Supp")
                 delete_button.clicked.connect(lambda _, row=row_position: self.delete_row2(row, task1, task2))
                 self.table2.setCellWidget(row_position, 2, delete_button)
                 priority.append((tasks.index(task1), tasks.index(task2)))
+                print(priority)
 
     def getResourses(self):
         res_num = self.text2.toPlainText()
         task_num = self.text1.toPlainText()
-        if not(res_num) or not(task_num):
-            self.show_error_message("Please complete all the fields")
-            return
         if res_num and task_num :
             if not res_num.isdigit() or not task_num.isdigit():
-                self.show_error_message("Please enter a valid number")
+                self.show_error_message("Entrer un nombre valide")
                 return
-            self.clear(int(task_num))
+            self.clear()
             self.clear2()
             resources.clear()
-            self.resLabel.hide()
-            self.resTable.hide()
-            self.resTable.setRowCount(0)
             for i in range(int(res_num)):
                 resources.append('Resource ' + str(i))
             tasks.clear()
             for i in range(int(task_num)):
                 tasks.append('Task ' + str(i))
+                tasks_resources.append([])
             self.showWidgets()
 
     def open_dialog(self):
         dialog = AddTaskDialog()
-        dialog.setWindowTitle("Tasks and Resources")
+        dialog.setWindowTitle("Taches et Ressources")
         if dialog.exec_() == QtWidgets.QDialog.Accepted:
             task, resource = dialog.getTasks()
             if task and resource and resources.index(resource) not in tasks_resources[tasks.index(task)]:
@@ -164,54 +157,48 @@ class Window2(QtWidgets.QMainWindow):
                 self.table.insertRow(row_position)
                 self.table.setItem(row_position, 0, QtWidgets.QTableWidgetItem(task))
                 self.table.setItem(row_position, 1, QtWidgets.QTableWidgetItem(resource))
-                delete_button = QtWidgets.QPushButton("Delete")
+                delete_button = QtWidgets.QPushButton("Supp")
                 delete_button.clicked.connect(lambda _, row=row_position: self.delete_row(row, task, resource))
                 self.table.setCellWidget(row_position, 2, delete_button)
                 tasks_resources[tasks.index(task)].append(resources.index(resource))
-
+                print(tasks_resources)
 
     def delete_row(self, row, task, resource):
         self.table.removeRow(row)
         tasks_resources[tasks.index(task)].remove(resources.index(resource))
-
+        print(tasks_resources)
 
     def delete_row2(self, row, task1, task2):
         self.table2.removeRow(row)
         priority.remove((tasks.index(task1), tasks.index(task2)))
-
+        print(priority)
 
     def showInputWidgets(self):
         self.showWidgets()
 
     def calculate(self):
-        try:
-            self.resTable.setRowCount(0)
-            result = schedule(len(tasks), len(resources), tasks_resources, priority)["plan"]
-            if not result:
-                self.resLabel.show()
-                self.resLabel.setText("Pas de solution trouvée. Il existe une relation cyclique de priorité")
-                self.resLabel.adjustSize()
-                self.resTable.hide()
-                return
-            self.resLabel.hide()
-            self.resTable.show()
-            self.resTable.setRowCount(len(result))
-            for i in range(len(result)):
-                resource_text = ', '.join([str(x) for x in result[i]])
-                self.resTable.setItem(i, 0, QtWidgets.QTableWidgetItem("Session " + str(i)))
-                self.resTable.setItem(i, 1, QtWidgets.QTableWidgetItem(resource_text))
-            self.resTable.resizeColumnsToContents()
-        except Exception as e:
-            print(e)
-            self.show_error_message(str(e))    
+        # try:
+        #     result = schedule(len(tasks), len(resources), tasks_resources, priority)["plan"]
+        #     print(result)
+        #     self.resTable.show()
+        #     self.resTable.setRowCount(len(tasks))
+        #     for i in range(len(result)):
+        #         resource_text = ', '.join([str(x) for x in result[i]])
+        #         self.resTable.setItem(i, 0, QtWidgets.QTableWidgetItem("Session " + str(i)))
+        #         self.resTable.setItem(i, 1, QtWidgets.QTableWidgetItem(resource_text))
+        #     self.resTable.resizeColumnsToContents()
+        # except Exception as e:
+        #     print(e)
+        #     self.show_error_message(str(e))    
+        print("Calculating...")     
         
 
     def show_error_message(self,message):
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Critical)
-        msg.setText("Error")
+        msg.setText("Erreur")
         msg.setInformativeText(message)
-        msg.setWindowTitle("Error")
+        msg.setWindowTitle("Erreur")
         msg.exec_()
 
        
