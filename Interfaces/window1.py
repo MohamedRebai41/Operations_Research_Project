@@ -282,48 +282,50 @@ class Window1(QtWidgets.QMainWindow):
         
     
 
-    # def optimise(self):
-        # print("Optimising...")
-        # if items and constraints:
-        #     if proteines and calories and calcium:
-        #         nb_items = len(items)
-        #         names = [item[0] for item in items]
-        #         cout = [int(item[4]) for item in items]
-        #         constraintsInf= []
-        #         constraintsSup = []
-        #         self.result.show()
+    def optimise(self):
+        if items and constraints:
+            if proteines and calories and calcium:
+                nb_items = len(items)
+                names = [item[0] for item in items]
+                cout = [int(item[4]) for item in items]
+                constraintsInf= []
+                constraintsSup = []
 
-                #     for i in range(len(constraints)):
-                #         temp = [0]*nb_items
-                #         for j in range(nb_items):
-                #             if constraints[i][0] == names[j]:
-                #                 temp[j] = 1
-                #                 break
-                #         temp.append(int(constraints[i][1]))
-                #         constraintsSup.append(temp)
-                #     const = [proteines, calories, calcium]
-                #     for i in range(3):
-                #         temp = []
-                #         for j in range(nb_items):
-                #             temp.append(items[j][i+1])
-                #         temp.append(int(const[i]))
-                #         constraintsInf.append(temp)
-                #     # call the optimization function to get the result 
-                #     x=optimize(nb_items, names, cout, constraintsInf, constraintsSup)
-                #     # Clear existing table content
-                #     self.result.clearContents()
-                #     print(x)
+                for i in range(len(constraints)):
+                    temp = [0]*nb_items
+                    for j in range(nb_items):
+                        if constraints[i][0] == names[j]:
+                            temp[j] = 1
+                            break
+                    temp.append(int(constraints[i][1]))
+                    constraintsSup.append(temp)
+                const = [proteines, calories, calcium]
+                for i in range(3):
+                    temp = []
+                    for j in range(nb_items):
+                        temp.append(items[j][i+1])
+                    temp.append(int(const[i]))
+                    constraintsInf.append(temp)
+                # call the optimization function to get the result 
+                x=optimize(nb_items, names, cout, constraintsInf, constraintsSup)
+                if x:
+                    self.result.show()
+                    self.resLabel.hide()
+                # Clear existing table content
+                    self.result.clearContents()
+                    # Set row and column count
+                    self.result.setRowCount(len(items))
 
-                #     # # Set row and column count
-                # self.result.setRowCount(len(items))
-
-                # for i in range(nb_items):
-                #     self.result.setItem(i, 0, QtWidgets.QTableWidgetItem(str(items[i][0])))
-                #     self.result.setItem(i, 1, QtWidgets.QTableWidgetItem(str(x[i])))
-                # print("Optimisation done")
-            # else:
-            #     self.show_error_message("You need to add the basic constraints")
-            #     return
+                    for i in range(nb_items):
+                        self.result.setItem(i, 0, QtWidgets.QTableWidgetItem(str(items[i][0])))
+                        self.result.setItem(i, 1, QtWidgets.QTableWidgetItem(str(x[i])))
+                else :
+                    self.resLabel.show()
+                    self.resLabel.setText("Pas de solution trouvée")
+                    self.resLabel.adjustSize()
+                    self.result.hide()
+            else:
+                self.show_error_message("You need to add the basic constraints first")
 
     def show_error_message(self,message):
         msg = QMessageBox()
