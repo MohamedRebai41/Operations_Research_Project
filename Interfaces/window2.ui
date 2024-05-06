@@ -156,7 +156,7 @@
   <widget class="QTextEdit" name="text1">
    <property name="geometry">
     <rect>
-     <x>260</x>
+     <x>280</x>
      <y>220</y>
      <width>81</width>
      <height>31</height>
@@ -166,7 +166,7 @@
   <widget class="QTextEdit" name="text2">
    <property name="geometry">
     <rect>
-     <x>260</x>
+     <x>280</x>
      <y>270</y>
      <width>81</width>
      <height>31</height>
@@ -216,7 +216,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Nombre de Ressources</string>
+    <string>Nombre de Ressources:</string>
    </property>
   </widget>
   <widget class="QTableWidget" name="table">
@@ -247,7 +247,7 @@
   <widget class="QPushButton" name="button2">
    <property name="geometry">
     <rect>
-     <x>360</x>
+     <x>380</x>
      <y>240</y>
      <width>83</width>
      <height>29</height>

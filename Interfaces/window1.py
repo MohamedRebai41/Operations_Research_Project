@@ -325,7 +325,7 @@ class Window1(QtWidgets.QMainWindow):
                     self.resLabel.adjustSize()
                     self.result.hide()
             else:
-                self.show_error_message("You need to add the basic constraints first")
+                self.show_error_message("Ajouter les objectifs")
 
     def show_error_message(self,message):
         msg = QMessageBox()
