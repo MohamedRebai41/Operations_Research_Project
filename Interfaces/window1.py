@@ -1,10 +1,11 @@
 from PyQt5 import QtWidgets, uic
 import sys
 import os
-from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtWidgets import QMessageBox,QScrollArea
 
 parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(parent_dir)
+from Nutrition.model import optimize
 
 # from Nutrition.model import optimize
 class AddItemDialog(QtWidgets.QDialog):
@@ -94,7 +95,7 @@ class Window1(QtWidgets.QMainWindow):
         self.addEl.clicked.connect(self.addElCont)
         self.addEl.setStyleSheet("background-color: #035283; color: white;")
         self.opt.setStyleSheet("background-color: #035283; color: white;")
-        # self.opt.clicked.connect(self.optimise)
+        self.opt.clicked.connect(self.optimise)
         self.addNum.setStyleSheet("background-color: #035283; color: white;")
         self.addNum.clicked.connect(self.numContraintes)
         self.ajouterCont.setStyleSheet("background-color: #035283; color: white;")
@@ -102,6 +103,7 @@ class Window1(QtWidgets.QMainWindow):
         self.addObj.clicked.connect(self.addObjCont)
         self.addObj.setStyleSheet("background-color: #035283; color: white;")
         self.hideElements()
+
 
     def hideElements(self):
         self.add.hide()
@@ -177,8 +179,8 @@ class Window1(QtWidgets.QMainWindow):
         self.tableEl.show()
         self.addEl.show()
         self.opt.show()
-        self.resLabel.show()
-        self.result.show()
+        # self.resLabel.show()
+        # self.result.show()
 
     def deleteCont(self, row):
         self.tableCont.removeRow(row)
@@ -280,31 +282,33 @@ class Window1(QtWidgets.QMainWindow):
             self.tableObj.removeRow(row)
             objectifs.pop(row)
         
-    
-
     def optimise(self):
-        if items and constraints:
-            if proteines and calories and calcium:
-                nb_items = len(items)
-                names = [item[0] for item in items]
-                cout = [int(item[4]) for item in items]
+        print("optimise")
+        print(elements)
+        print(objectifs)
+        print(elementsCont)
+        print(contraintes)
+        if elements and objectifs and elementsCont:
+            if contraintes:
+                nb_items = len(elements)
+                names = [item[0] for item in elements]
+                cout = [int(item[-1]) for item in elements]
                 constraintsInf= []
                 constraintsSup = []
 
-                for i in range(len(constraints)):
+                for i in range(len(elementsCont)):
                     temp = [0]*nb_items
                     for j in range(nb_items):
-                        if constraints[i][0] == names[j]:
+                        if elementsCont[i][0] == names[j]:
                             temp[j] = 1
                             break
-                    temp.append(int(constraints[i][1]))
+                    temp.append(int(elementsCont[i][1]))
                     constraintsSup.append(temp)
-                const = [proteines, calories, calcium]
-                for i in range(3):
+                for i in range(len(contraintes)):
                     temp = []
                     for j in range(nb_items):
-                        temp.append(items[j][i+1])
-                    temp.append(int(const[i]))
+                        temp.append(elements[j][i+1])
+                    temp.append(int(objectifs[i][1]))
                     constraintsInf.append(temp)
                 # call the optimization function to get the result 
                 x=optimize(nb_items, names, cout, constraintsInf, constraintsSup)
@@ -314,10 +318,10 @@ class Window1(QtWidgets.QMainWindow):
                 # Clear existing table content
                     self.result.clearContents()
                     # Set row and column count
-                    self.result.setRowCount(len(items))
+                    self.result.setRowCount(len(elements))
 
                     for i in range(nb_items):
-                        self.result.setItem(i, 0, QtWidgets.QTableWidgetItem(str(items[i][0])))
+                        self.result.setItem(i, 0, QtWidgets.QTableWidgetItem(str(elements[i][0])))
                         self.result.setItem(i, 1, QtWidgets.QTableWidgetItem(str(x[i])))
                 else :
                     self.resLabel.show()
@@ -335,7 +339,6 @@ class Window1(QtWidgets.QMainWindow):
         msg.setWindowTitle("Error")
         msg.exec_()
 
-       
 
 
 
