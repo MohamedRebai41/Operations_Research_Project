@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets, uic
 import sys
 import os
-from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtWidgets import QMessageBox,QScrollArea
 
 parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(parent_dir)
@@ -95,7 +95,7 @@ class Window1(QtWidgets.QMainWindow):
         self.addEl.clicked.connect(self.addElCont)
         self.addEl.setStyleSheet("background-color: #035283; color: white;")
         self.opt.setStyleSheet("background-color: #035283; color: white;")
-        # self.opt.clicked.connect(self.optimise)
+        self.opt.clicked.connect(self.optimise)
         self.addNum.setStyleSheet("background-color: #035283; color: white;")
         self.addNum.clicked.connect(self.numContraintes)
         self.ajouterCont.setStyleSheet("background-color: #035283; color: white;")
@@ -103,6 +103,7 @@ class Window1(QtWidgets.QMainWindow):
         self.addObj.clicked.connect(self.addObjCont)
         self.addObj.setStyleSheet("background-color: #035283; color: white;")
         self.hideElements()
+
 
     def hideElements(self):
         self.add.hide()
@@ -178,8 +179,8 @@ class Window1(QtWidgets.QMainWindow):
         self.tableEl.show()
         self.addEl.show()
         self.opt.show()
-        self.resLabel.show()
-        self.result.show()
+        # self.resLabel.show()
+        # self.result.show()
 
     def deleteCont(self, row):
         self.tableCont.removeRow(row)
@@ -282,6 +283,11 @@ class Window1(QtWidgets.QMainWindow):
             objectifs.pop(row)
         
     def optimise(self):
+        print("optimise")
+        print(elements)
+        print(objectifs)
+        print(elementsCont)
+        print(contraintes)
         if elements and objectifs and elementsCont:
             if contraintes:
                 nb_items = len(elements)
